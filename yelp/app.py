@@ -2,9 +2,11 @@ import io
 import csv
 import os
 import sys
+import re
 import glob
 import time
 import subprocess
+import urllib.request
 import streamlit as st
 from playwright.sync_api import sync_playwright
 from scrapling.parser import Selector
@@ -22,7 +24,7 @@ from scraper import (
 # dpkg-deb -x also requires no root — it just extracts files to a local dir.
 _REQUIRED_PACKAGES = [
     "libglib2.0-0",
-    "libglib2.0-0t64",   # Ubuntu 24.04 renamed it
+    "libglib2.0-0t64",
     "libnss3",
     "libnspr4",
     "libdbus-1-3",
@@ -39,36 +41,95 @@ _REQUIRED_PACKAGES = [
     "libxrandr2",
     "libgbm1",
     "libasound2",
-    "libasound2t64",     # Ubuntu 24.04 renamed it
+    "libasound2t64",
     "libatspi2.0-0",
     "libatspi2.0-0t64",
     "libexpat1",
 ]
 
+# For packages that aren't in the apt index, fall back to Debian's public pool.
+# Scraped from the directory listing — no hardcoded version numbers needed.
+_POOL_DIRS = {
+    "libatk1.0-0":           "http://deb.debian.org/debian/pool/main/a/atk1.0/",
+    "libatk1.0-0t64":        "http://deb.debian.org/debian/pool/main/a/atk1.0/",
+    "libatk-bridge2.0-0":    "http://deb.debian.org/debian/pool/main/a/at-spi2-atk/",
+    "libatk-bridge2.0-0t64": "http://deb.debian.org/debian/pool/main/a/at-spi2-atk/",
+    "libatspi2.0-0":         "http://deb.debian.org/debian/pool/main/a/at-spi2-core/",
+    "libatspi2.0-0t64":      "http://deb.debian.org/debian/pool/main/a/at-spi2-core/",
+}
+
 _LIB_DIR = "/tmp/pw_libs"
+_DEB_DIR = "/tmp/debs"
+
+
+def _pool_download(pkg_name: str, dest_dir: str) -> tuple[bool, str]:
+    """
+    Fetch Debian's pool directory listing, find the latest amd64 deb for
+    pkg_name, download it to dest_dir.  Returns (success, detail).
+    """
+    pool_url = _POOL_DIRS.get(pkg_name)
+    if not pool_url:
+        return False, "no pool URL defined"
+
+    try:
+        req = urllib.request.Request(pool_url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            html = resp.read().decode("utf-8", errors="replace")
+    except Exception as e:
+        return False, f"listing fetch failed: {e}"
+
+    # Find all amd64 debs for this exact package (prefix match)
+    prefix = re.escape(pkg_name) + r"_[^\"]+_amd64\.deb"
+    matches = re.findall(prefix, html)
+    if not matches:
+        return False, f"no amd64 deb found in {pool_url}"
+
+    filename = matches[-1]          # last = newest version in the listing
+    download_url = pool_url + filename
+    dest = os.path.join(dest_dir, filename)
+    try:
+        urllib.request.urlretrieve(download_url, dest)
+        return True, download_url
+    except Exception as e:
+        return False, f"download failed: {e}"
 
 
 @st.cache_resource(show_spinner="Setting up browser (first run only)...")
 def install_browsers():
     log = {}
 
-    # ── Step 1: download missing system libs without root ──────────────────────
-    os.makedirs(_LIB_DIR, exist_ok=True)
-    os.makedirs("/tmp/debs", exist_ok=True)
+    # ── OS info (helps diagnose future failures) ───────────────────────────────
+    try:
+        with open("/etc/os-release") as f:
+            log["os_release"] = f.read().strip()[:200]
+    except Exception:
+        log["os_release"] = "n/a"
 
-    dl_results = {}
+    os.makedirs(_LIB_DIR, exist_ok=True)
+    os.makedirs(_DEB_DIR, exist_ok=True)
+
+    # ── Step 1: try apt-get download first (fast, no root needed) ─────────────
+    apt_results = {}
     for pkg in _REQUIRED_PACKAGES:
         r = subprocess.run(
             ["apt-get", "download", pkg],
-            cwd="/tmp/debs",
-            capture_output=True, text=True,
+            cwd=_DEB_DIR, capture_output=True, text=True,
         )
-        dl_results[pkg] = r.returncode
+        apt_results[pkg] = r.returncode
 
-    log["download_results"] = dl_results
+    log["apt_results"] = apt_results
 
-    # ── Step 2: extract all downloaded debs ────────────────────────────────────
-    debs = glob.glob("/tmp/debs/*.deb")
+    # ── Step 2: for packages apt couldn't find, fetch from Debian pool ─────────
+    fallback_results = {}
+    for pkg, rc in apt_results.items():
+        if rc != 0 and pkg in _POOL_DIRS:
+            ok, detail = _pool_download(pkg, _DEB_DIR)
+            fallback_results[pkg] = detail if ok else f"FAILED: {detail}"
+
+    log["fallback_results"] = fallback_results
+
+    # ── Step 3: extract every downloaded deb ──────────────────────────────────
+    debs = glob.glob(f"{_DEB_DIR}/*.deb")
     extract_results = {}
     for deb in debs:
         r = subprocess.run(
@@ -79,17 +140,19 @@ def install_browsers():
 
     log["extract_results"] = extract_results
 
-    # ── Step 3: point LD_LIBRARY_PATH at the extracted shared objects ──────────
+    # ── Step 4: set LD_LIBRARY_PATH to the extracted libs ─────────────────────
     so_files = glob.glob(f"{_LIB_DIR}/**/*.so*", recursive=True)
-    lib_dirs  = list({os.path.dirname(f) for f in so_files})
+    lib_dirs = list({os.path.dirname(f) for f in so_files})
     if lib_dirs:
-        os.environ["LD_LIBRARY_PATH"] = ":".join(lib_dirs) + ":" + os.environ.get("LD_LIBRARY_PATH", "")
+        os.environ["LD_LIBRARY_PATH"] = (
+            ":".join(lib_dirs) + ":" + os.environ.get("LD_LIBRARY_PATH", "")
+        )
 
-    log["so_files_found"] = len(so_files)
-    log["lib_dirs"]       = lib_dirs
+    log["so_files_found"]  = len(so_files)
+    log["lib_dirs"]        = lib_dirs
     log["LD_LIBRARY_PATH"] = os.environ.get("LD_LIBRARY_PATH", "")
 
-    # ── Step 4: install Playwright's Chromium binary ───────────────────────────
+    # ── Step 5: install Playwright's Chromium binary ───────────────────────────
     r_install = subprocess.run(
         [sys.executable, "-m", "playwright", "install", "chromium"],
         capture_output=True, text=True,
@@ -97,9 +160,9 @@ def install_browsers():
     log["install_rc"]  = r_install.returncode
     log["install_out"] = (r_install.stdout + r_install.stderr)[-400:]
 
-    # ── Step 5: verify glib is now findable ────────────────────────────────────
-    glib_files = glob.glob(f"{_LIB_DIR}/**/libglib-2.0.so*", recursive=True)
-    log["glib_files"] = glib_files
+    # ── Step 6: spot-check key libs ───────────────────────────────────────────
+    log["atk_files"]  = glob.glob(f"{_LIB_DIR}/**/libatk*.so*", recursive=True)
+    log["glib_files"] = glob.glob(f"{_LIB_DIR}/**/libglib-2.0.so*", recursive=True)
 
     return log
 
@@ -108,7 +171,6 @@ debug = install_browsers()
 
 
 def cloud_fetch(url: str) -> Selector:
-    env = os.environ.copy()
     with sync_playwright() as p:
         browser = p.chromium.launch(
             headless=True,
