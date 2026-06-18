@@ -279,32 +279,51 @@ def install_browsers():
 debug = install_browsers()
 
 
+_CHROME_ARGS = [
+    "--no-sandbox",
+    "--disable-setuid-sandbox",
+    "--disable-dev-shm-usage",       # use /tmp instead of tiny /dev/shm
+    "--disable-gpu",
+    "--disable-software-rasterizer",
+    "--no-zygote",                   # skip zygote process, saves ~50 MB
+    "--no-first-run",
+    "--renderer-process-limit=1",    # only one renderer at a time
+    "--disable-blink-features=AutomationControlled",
+    "--disable-background-networking",
+    "--disable-sync",
+]
+
+
 def cloud_fetch(url: str) -> Selector:
-    with sync_playwright() as p:
-        browser = p.chromium.launch(
-            headless=True,
-            args=[
-                "--no-sandbox",
-                "--disable-dev-shm-usage",
-                "--disable-blink-features=AutomationControlled",
-            ],
-        )
-        ctx = browser.new_context(
-            user_agent=(
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                "AppleWebKit/537.36 (KHTML, like Gecko) "
-                "Chrome/131.0.0.0 Safari/537.36"
-            ),
-            extra_http_headers={"Referer": "https://www.google.com/"},
-        )
-        ctx.add_init_script(
-            "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
-        )
-        page = ctx.new_page()
-        page.goto(url, wait_until="networkidle", timeout=60_000)
-        content = page.content()
-        browser.close()
-    return Selector(content)
+    # Apollo state is in the initial HTML, so domcontentloaded is enough.
+    # networkidle hangs waiting for Yelp's background XHRs and can OOM the container.
+    last_err: Exception | None = None
+    for attempt in range(2):
+        try:
+            with sync_playwright() as p:
+                browser = p.chromium.launch(headless=True, args=_CHROME_ARGS)
+                ctx = browser.new_context(
+                    user_agent=(
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                        "AppleWebKit/537.36 (KHTML, like Gecko) "
+                        "Chrome/131.0.0.0 Safari/537.36"
+                    ),
+                    extra_http_headers={"Referer": "https://www.google.com/"},
+                )
+                ctx.add_init_script(
+                    "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
+                )
+                page = ctx.new_page()
+                page.goto(url, wait_until="domcontentloaded", timeout=60_000)
+                # Brief pause for Yelp's inline scripts to finish writing Apollo state
+                page.wait_for_timeout(2_000)
+                content = page.content()
+                browser.close()
+            return Selector(content)
+        except Exception as exc:
+            last_err = exc
+            time.sleep(3)
+    raise last_err  # type: ignore[misc]
 
 
 def fetch_phone_cloud(biz_url: str) -> str:
