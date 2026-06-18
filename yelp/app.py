@@ -1,11 +1,12 @@
 import io
 import csv
+import sys
 import time
+import subprocess
 import streamlit as st
 
 from scraper import (
     build_search_url,
-    fetch_page,
     extract_apollo_state,
     resolve_search_order,
     parse_search_page,
@@ -16,6 +17,17 @@ from scraper import (
 st.set_page_config(page_title="Yelp Scraper", layout="centered")
 st.title("Yelp Business Scraper")
 
+
+@st.cache_resource(show_spinner="Setting up browser (first run only)...")
+def install_browsers():
+    subprocess.run(
+        [sys.executable, "-m", "patchright", "install", "chromium"],
+        capture_output=True,
+    )
+
+
+install_browsers()
+
 query    = st.text_input("What are you looking for?", placeholder="e.g. pizza, dentist, plumber")
 location = st.text_input("City", placeholder="e.g. New York")
 pages    = st.number_input("Number of pages", min_value=1, max_value=20, value=3)
@@ -25,35 +37,29 @@ st.caption(f"Each page has ~10 results — {pages} pages = up to {pages * RESULT
 run = st.button("Scrape", type="primary", disabled=not (query and location))
 
 if run:
+    from scrapling.fetchers import StealthyFetcher
+
     all_results = []
     status = st.empty()
     progress = st.progress(0)
     table_placeholder = st.empty()
 
     # --- Step 1: collect businesses from search pages ---
-    for i in range(pages):
+    for i in range(int(pages)):
         start = i * RESULTS_PER_PAGE
         url = build_search_url(query, location, start)
         status.info(f"Searching page {i + 1} of {pages}...")
 
         try:
-            page = fetch_page(url)
-            page_text = str(page.text or "").lower()
-
-            if "access denied" in page_text or "captcha" in page_text or "robot" in page_text:
-                st.error("Yelp blocked this request (datacenter IP detected). This scraper needs residential proxies to work when deployed. It works fine on your local machine.")
-                with st.expander("Debug info"):
-                    st.code(str(page.text or "")[:1000])
-                st.stop()
-
+            page = StealthyFetcher.fetch(
+                url,
+                headless=True,
+                network_idle=True,
+                google_search=True,
+                disable_resources=True,
+                timeout=60_000,
+            )
             state = extract_apollo_state(page)
-
-            if not state:
-                st.error("Yelp returned a page without the expected data. This usually means the request was blocked or Yelp changed their page structure.")
-                with st.expander("Debug — first 1000 chars of response"):
-                    st.code(str(page.text or "")[:1000])
-                st.stop()
-
             ordered = resolve_search_order(state)
             batch = parse_search_page(state, ordered) if ordered else []
         except Exception as e:
@@ -61,35 +67,32 @@ if run:
             break
 
         if not batch:
-            status.warning("No more results found.")
+            status.warning("No results found on this page.")
             break
 
         all_results.extend(batch)
-        progress.progress((i + 1) / (pages * 2))  # first half of progress bar
+        progress.progress((i + 1) / (int(pages) * 2))
         time.sleep(2)
 
     if not all_results:
-        st.error("No businesses found. Try a different search.")
+        st.error("No businesses found. Try a different search or city.")
         st.stop()
 
     # --- Step 2: fetch phone numbers ---
     total = len(all_results)
     for idx, r in enumerate(all_results):
-        status.info(f"Getting phone number {idx + 1} of {total}: {r['name']}")
-        r["phone"] = fetch_phone(r["url"])
+        status.info(f"Getting phone {idx + 1} of {total}: {r['name']}")
+        r["phone"] = fetch_phone(r["url"], use_stealth=True)
         progress.progress(0.5 + (idx + 1) / (total * 2))
 
-        # show live table as we go
         table_placeholder.dataframe(
-            [{k: v for k, v in x.items()} for x in all_results[:idx + 1]],
+            [x for x in all_results[:idx + 1]],
             use_container_width=True,
         )
         time.sleep(2)
 
     progress.progress(1.0)
     status.success(f"Done! Scraped {total} businesses.")
-
-    # --- Results table ---
     table_placeholder.dataframe(all_results, use_container_width=True)
 
     # --- CSV download ---
@@ -99,7 +102,7 @@ if run:
     writer.writeheader()
     writer.writerows(all_results)
 
-    filename = f"{query.replace(' ', '_')}_{location.replace(', ', '_').replace(' ', '_')}.csv"
+    filename = f"{query.replace(' ', '_')}_{location.replace(' ', '_')}.csv"
     st.download_button(
         label="Download CSV",
         data=buf.getvalue().encode("utf-8"),
