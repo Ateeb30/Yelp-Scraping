@@ -1,0 +1,2 @@
+scrapling[fetchers]>=0.4.9
+streamlit>=1.45.0
