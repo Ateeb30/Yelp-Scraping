@@ -2,6 +2,7 @@ import io
 import csv
 import os
 import sys
+import glob
 import time
 import subprocess
 import streamlit as st
@@ -19,35 +20,46 @@ from scraper import (
 
 @st.cache_resource(show_spinner="Setting up browser (first run only)...")
 def install_browsers():
-    # libglib-2.0.so.0 is on the system but ldconfig may not have registered it.
-    # Explicitly point the dynamic linker at the standard lib paths.
-    lib_dirs = [
-        "/usr/lib/x86_64-linux-gnu",
-        "/usr/lib",
-        "/lib/x86_64-linux-gnu",
-        "/lib",
-    ]
-    existing = os.environ.get("LD_LIBRARY_PATH", "")
-    os.environ["LD_LIBRARY_PATH"] = ":".join(lib_dirs) + (":" + existing if existing else "")
-
-    subprocess.run(
-        [sys.executable, "-m", "playwright", "install", "chromium"],
-        capture_output=True,
+    # Try playwright's own dep installer (needs sudo — works on some cloud envs)
+    r_deps = subprocess.run(
+        ["sudo", sys.executable, "-m", "playwright", "install-deps", "chromium"],
+        capture_output=True, text=True,
     )
 
+    # Search the filesystem for libglib and set LD_LIBRARY_PATH to wherever it is
+    glib_files = (
+        glob.glob("/usr/**/libglib-2.0.so*", recursive=True)
+        + glob.glob("/lib/**/libglib-2.0.so*", recursive=True)
+    )
+    if glib_files:
+        dirs = ":".join({os.path.dirname(f) for f in glib_files})
+        os.environ["LD_LIBRARY_PATH"] = dirs + ":" + os.environ.get("LD_LIBRARY_PATH", "")
 
-install_browsers()
+    # Install Playwright's Chromium binary
+    r_install = subprocess.run(
+        [sys.executable, "-m", "playwright", "install", "chromium"],
+        capture_output=True, text=True,
+    )
+
+    return {
+        "glib_files": glib_files,
+        "deps_rc": r_deps.returncode,
+        "deps_out": r_deps.stdout[-300:] + r_deps.stderr[-300:],
+        "install_rc": r_install.returncode,
+        "install_out": r_install.stdout[-300:] + r_install.stderr[-300:],
+        "ld_path": os.environ.get("LD_LIBRARY_PATH", ""),
+    }
+
+
+debug = install_browsers()
 
 
 def cloud_fetch(url: str) -> Selector:
     with sync_playwright() as p:
         browser = p.chromium.launch(
             headless=True,
-            args=[
-                "--no-sandbox",
-                "--disable-dev-shm-usage",
-                "--disable-blink-features=AutomationControlled",
-            ],
+            args=["--no-sandbox", "--disable-dev-shm-usage",
+                  "--disable-blink-features=AutomationControlled"],
         )
         ctx = browser.new_context(
             user_agent=(
@@ -90,10 +102,12 @@ def fetch_phone_cloud(biz_url: str) -> str:
 st.set_page_config(page_title="Yelp Scraper", layout="centered")
 st.title("Yelp Business Scraper")
 
+with st.expander("Browser setup debug info"):
+    st.json(debug)
+
 query    = st.text_input("What are you looking for?", placeholder="e.g. pizza, dentist, plumber")
 location = st.text_input("City", placeholder="e.g. New York")
 pages    = st.number_input("Number of pages", min_value=1, max_value=20, value=3)
-
 st.caption(f"Each page has ~10 results — {pages} pages = up to {pages * RESULTS_PER_PAGE} businesses.")
 
 run = st.button("Scrape", type="primary", disabled=not (query and location))
@@ -108,7 +122,6 @@ if run:
         start = i * RESULTS_PER_PAGE
         url = build_search_url(query, location, start)
         status.info(f"Searching page {i + 1} of {pages}...")
-
         try:
             page = cloud_fetch(url)
             state = extract_apollo_state(page)
