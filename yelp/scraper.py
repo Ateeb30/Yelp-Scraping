@@ -28,13 +28,17 @@ def build_search_url(query: str, location: str, start: int = 0) -> str:
     return f"https://www.yelp.com/search?find_desc={q}&find_loc={loc}&start={start}"
 
 
-def fetch_page(url: str, use_stealth: bool = False):
+def fetch_page(url: str, use_stealth: bool = False, proxy: str | None = None):
+    kwargs = {}
+    if proxy:
+        kwargs["proxy"] = proxy
     if use_stealth:
         return StealthyFetcher.fetch(
             url, headless=True, network_idle=True,
             google_search=True, disable_resources=True, timeout=45_000,
+            **kwargs,
         )
-    return Fetcher.get(url, stealthy_headers=True, impersonate="chrome", timeout=20)
+    return Fetcher.get(url, stealthy_headers=True, impersonate="chrome", timeout=20, **kwargs)
 
 
 def extract_apollo_state(page) -> dict:
@@ -86,9 +90,9 @@ def parse_search_page(state: dict, ordered_encids: list[str]) -> list[dict]:
     return results
 
 
-def fetch_phone(biz_url: str, use_stealth: bool = False) -> str:
+def fetch_phone(biz_url: str, use_stealth: bool = False, proxy: str | None = None) -> str:
     try:
-        page = fetch_page(biz_url, use_stealth)
+        page = fetch_page(biz_url, use_stealth, proxy=proxy)
         state = extract_apollo_state(page)
         for key, value in state.items():
             if not key.startswith("Business:") or not isinstance(value, dict):
