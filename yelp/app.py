@@ -388,7 +388,16 @@ if run:
             break
 
         if not batch:
-            status.warning("No results found on this page.")
+            html_str   = str(page.html or "")
+            has_root   = "ROOT_QUERY" in html_str
+            title_els  = page.css("title")
+            page_title = title_els[0].text.strip() if title_els else "(no title)"
+            st.warning(
+                f"No Apollo state on page {i+1}.  "
+                f"**Title:** `{page_title[:120]}`  |  "
+                f"**ROOT_QUERY in HTML:** `{has_root}`  |  "
+                f"**HTML size:** {len(html_str)} chars"
+            )
             break
 
         all_results.extend(batch)
