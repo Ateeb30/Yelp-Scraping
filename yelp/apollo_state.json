@@ -1,0 +1,3006 @@
+{
+  "ROOT_QUERY": {
+    "__typename": "Query",
+    "loggedInUser": null,
+    "siteConfig": {
+      "__typename": "SiteConfig",
+      "cdnDomain": "s3-media0.fl.yelpcdn.com",
+      "holidayLogoModifier": null
+    },
+    "webHeader({\"logoVariant\":\"DEFAULT\"})": {
+      "__typename": "WebHeader",
+      "logoUrl": "https://s3-media0.fl.yelpcdn.com/assets/srv0/yelp_design_cdn/7ef71bf77a33/assets/img/brand/logo_desktop.svg"
+    },
+    "mruLocation({\"locationQueryParam\":null})": {
+      "__typename": "MruLocation",
+      "display": "San Francisco, CA"
+    },
+    "consumerEducator({\"platform\":\"WWW\",\"spot\":\"WWW_BANNER\"})": null,
+    "webConsumerFooter({\"baseUrl\":\"https://www.yelp.com/\",\"urlOptions\":{}})": {
+      "__typename": "WebConsumerFooter",
+      "copyright": {
+        "__typename": "WebConsumerFooterCopyright",
+        "burstLogo": "https://s3-media0.fl.yelpcdn.com/assets/srv0/yelp_design_cdn/cabcef1daea2/assets/img/brand/burst_red.svg",
+        "defaultLogo": "https://s3-media0.fl.yelpcdn.com/assets/srv0/yelp_design_cdn/7ef71bf77a33/assets/img/brand/logo_desktop.svg"
+      },
+      "desktopColumns": [
+        {
+          "__typename": "WebConsumerFooterColumn",
+          "title": "About",
+          "links": [
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp.com/about",
+              "text": "About Yelp"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp.com/careers/home",
+              "text": "Careers"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp.com/press",
+              "text": "Press"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "http://yelp-ir.com/",
+              "text": "Investor Relations"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://trust.yelp.com",
+              "text": "Trust & Safety"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp.com/guidelines",
+              "text": "Content Guidelines"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp-support.com/article/Yelp-Accessibility-Statement",
+              "text": "Accessibility Statement"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp.com/static?p=tos",
+              "text": "Terms of Service"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp.com/tos/privacy_policy",
+              "text": "Privacy Policy"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp.com/static?p=tos#third-parties",
+              "text": "Ad Choices"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp-support.com/article/Your-Privacy-Choices?l=en_US",
+              "text": "Your Privacy Choices"
+            }
+          ]
+        },
+        {
+          "__typename": "WebConsumerFooterColumn",
+          "title": "Discover",
+          "links": [
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp.com/costs",
+              "text": "Yelp Project Cost Guides"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp.com/collections",
+              "text": "Collections"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp.com/talk",
+              "text": "Talk"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp.com/events",
+              "text": "Events"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://blog.yelp.com/",
+              "text": "Yelp Blog"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp-support.com/",
+              "text": "Support"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp.com/yelpmobile?source=footer",
+              "text": "Yelp Mobile"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp.com/developers?country=US",
+              "text": "Developers"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp.com/rss",
+              "text": "RSS"
+            }
+          ]
+        },
+        {
+          "__typename": "WebConsumerFooterColumn",
+          "title": "Yelp for Business",
+          "links": [
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://business.yelp.com/?utm_source=footer&utm_medium=www",
+              "text": "Yelp for Business"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://biz.yelp.com/login",
+              "text": "Business Owner Login"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://business.yelp.com?utm_source=footer&utm_medium=www&utm_content=claim_footer_link&utm_campaign=claim_business",
+              "text": "Claim your Business Page"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://business.yelp.com/products/yelp-ads/?utm_source=footer&utm_medium=www&utm_campaign=ad-start-y4bweb",
+              "text": "Advertise on Yelp"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://business.yelp.com/restaurants/?utm_source=footer&utm_medium=www",
+              "text": "Yelp for Restaurant Owners"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://business.yelp.com/restaurants/products/yelp-guest-manager/?utm_source=footer&utm_medium=www",
+              "text": "Yelp Guest Manager"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://business.yelp.com/resources/?utm_source=footer&utm_medium=www",
+              "text": "Business Resources"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp-support.com/Yelp_for_Business?l=en_US",
+              "text": "Business Support"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://business.yelp.com/partners/?utm_source=footer&utm_medium=www&utm_content=partners&utm_campaign=partners_cons",
+              "text": "Marketing & Advertising Agencies"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://business.yelp.com/data/products/fusion-insights/?utm_source=footer&utm_medium=www",
+              "text": "Yelp Data for B2B"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://business.yelp.com/data/products/fusion/?utm_source=footer&utm_medium=www",
+              "text": "Yelp Data for B2C"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://business.yelp.com/data/products/fusion-ai/?utm_source=footer&utm_medium=www",
+              "text": "Agentic AI"
+            }
+          ]
+        },
+        {
+          "__typename": "WebConsumerFooterColumn",
+          "title": "RepairPal",
+          "links": [
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://repairpal.com",
+              "text": "RepairPal Home"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://repairpal.com/auto-repair-near-me",
+              "text": "Auto Repair Near Me"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://repairpal.com/estimator",
+              "text": "Car Repair Estimates"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://repairpal.com/recalls",
+              "text": "Auto Safety Recalls"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://repairpal.com/symptoms",
+              "text": "Symptom Guides"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://repairpal.com/problems",
+              "text": "Common Problems"
+            }
+          ]
+        }
+      ],
+      "mobileColumns": [
+        {
+          "__typename": "WebConsumerFooterColumn",
+          "title": "Yelp",
+          "links": [
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp.com/about",
+              "text": "About"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://blog.yelp.com/",
+              "text": "Blog"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp-support.com/",
+              "text": "Support"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp.com/static?p=tos",
+              "text": "Terms"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp.com/tos/privacy_policy",
+              "text": "Privacy Policy"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://www.yelp-support.com/article/Your-Privacy-Choices?l=en_US",
+              "text": "Your Privacy Choices"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://business.yelp.com/?utm_source=footer&utm_medium=www",
+              "text": "Yelp for Business"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://business.yelp.com/restaurants/?utm_source=footer&utm_medium=www",
+              "text": "Yelp for Restaurant Owners"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://business.yelp.com/partners/?utm_source=footer&utm_medium=www&utm_content=partners&utm_campaign=partners_cons",
+              "text": "Marketing & Advertising Agencies"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://business.yelp.com/data/products/fusion-insights/?utm_source=footer&utm_medium=www",
+              "text": "Yelp Data for B2B"
+            }
+          ]
+        },
+        {
+          "__typename": "WebConsumerFooterColumn",
+          "title": "RepairPal",
+          "links": [
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://repairpal.com",
+              "text": "RepairPal Home"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://repairpal.com/auto-repair-near-me",
+              "text": "Auto Repair Near Me"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://repairpal.com/estimator",
+              "text": "Car Repair Estimates"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://repairpal.com/recalls",
+              "text": "Auto Safety Recalls"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://repairpal.com/symptoms",
+              "text": "Symptom Guides"
+            },
+            {
+              "__typename": "WebConsumerFooterLink",
+              "href": "https://repairpal.com/problems",
+              "text": "Common Problems"
+            }
+          ]
+        }
+      ]
+    },
+    "searchPage({\"pageUrl\":\"https://www.yelp.com/search?find_desc=pizza&find_loc=New+York%2C+NY&start=0\",\"searchContextId\":\"f92f0309968d0233\",\"uniqueRequestId\":\"f92f0309968d0233\"})": {
+      "__typename": "SearchPage",
+      "dataAttributionSources": "acxiom",
+      "gaDimensions": {
+        "global": {
+          "account_level": [
+            1,
+            "anon"
+          ],
+          "content_country": [
+            11,
+            "US"
+          ],
+          "distil": [
+            12,
+            null
+          ],
+          "distil_js_enabled": [
+            13,
+            null
+          ],
+          "exact_name_match": [
+            14,
+            ""
+          ],
+          "full_url": [
+            15,
+            "/search?find_desc=pizza&find_loc=New+York%2C+NY&start=0"
+          ],
+          "has_canonical": [
+            16,
+            "True"
+          ],
+          "is_indexable": [
+            19,
+            "True"
+          ],
+          "query_words_number": [
+            25,
+            1
+          ],
+          "results_on_page": [
+            29,
+            ""
+          ],
+          "search_city": [
+            31,
+            "New York"
+          ],
+          "search_location_lat_lng": [
+            35,
+            "40.705445,-73.994293"
+          ],
+          "top_level_categories": [
+            7,
+            "restaurants"
+          ]
+        },
+        "www": {
+          "account_level": [
+            1,
+            "anon"
+          ],
+          "business_id": [
+            141,
+            ""
+          ],
+          "content_country": [
+            15,
+            "US"
+          ],
+          "distil": [
+            53,
+            null
+          ],
+          "distil_js_enabled": [
+            138,
+            null
+          ],
+          "exact_name_match": [
+            50,
+            ""
+          ],
+          "full_url": [
+            34,
+            "/search?find_desc=pizza&find_loc=New+York%2C+NY&start=0"
+          ],
+          "has_canonical": [
+            36,
+            "True"
+          ],
+          "is_biz_user": [
+            129,
+            "False"
+          ],
+          "is_indexable": [
+            42,
+            "True"
+          ],
+          "page_depth": [
+            41,
+            ""
+          ],
+          "query_words_number": [
+            52,
+            1
+          ],
+          "results_on_page": [
+            51,
+            ""
+          ],
+          "search_city": [
+            49,
+            "New York"
+          ],
+          "search_location_lat_lng": [
+            109,
+            "40.705445,-73.994293"
+          ],
+          "top_level_categories": [
+            11,
+            "restaurants"
+          ],
+          "viewport_tracking": [
+            29,
+            null
+          ]
+        }
+      },
+      "autoModalUrl": null,
+      "preSearchContext": {
+        "__typename": "PreSearchContext",
+        "query": "pizza",
+        "topCategories": [
+          "pizza",
+          "italian",
+          "pastashops",
+          "sicilian",
+          "chicken_wings"
+        ],
+        "topRootCategory": "restaurants",
+        "topVertical": "restaurants",
+        "filters": null,
+        "defaultGeobox": {
+          "__typename": "LngLatBounds",
+          "maxLatitude": 40.86160247981026,
+          "minLatitude": 40.549287249082035,
+          "maxLongitude": -73.7896728515625,
+          "minLongitude": -74.19891357421875,
+          "center": {
+            "__typename": "GeoCoordinate",
+            "latitude": 40.70544486,
+            "longitude": -73.99429321
+          }
+        },
+        "locationInfo": {
+          "__typename": "GenericLocation",
+          "display": "New York, NY",
+          "city": "New York",
+          "state": "NY",
+          "country": "US"
+        }
+      }
+    },
+    "communityQuestions": {
+      "__typename": "CommunityQuestions",
+      "forSearchContext({\"first\":10,\"searchContextId\":\"f92f0309968d0233\"})": {
+        "__typename": "CommunityQuestionConnection",
+        "edges": [
+          {
+            "__typename": "CommunityQuestionEdge",
+            "node": {
+              "__ref": "CommunityQuestion:HhzQysu2dUyOj3yvX1uhWg"
+            }
+          },
+          {
+            "__typename": "CommunityQuestionEdge",
+            "node": {
+              "__ref": "CommunityQuestion:xrv3DcyASxXSpnoUh3AXsg"
+            }
+          },
+          {
+            "__typename": "CommunityQuestionEdge",
+            "node": {
+              "__ref": "CommunityQuestion:5sWK9csLGEdq2eq6B7NSUw"
+            }
+          },
+          {
+            "__typename": "CommunityQuestionEdge",
+            "node": {
+              "__ref": "CommunityQuestion:jWIoOuZIVgDYLZH4z99KCw"
+            }
+          },
+          {
+            "__typename": "CommunityQuestionEdge",
+            "node": {
+              "__ref": "CommunityQuestion:DXmQuMNaJupKYmpVfC1Nzw"
+            }
+          },
+          {
+            "__typename": "CommunityQuestionEdge",
+            "node": {
+              "__ref": "CommunityQuestion:BMPP5zhl6PVRgppk3wwtVg"
+            }
+          },
+          {
+            "__typename": "CommunityQuestionEdge",
+            "node": {
+              "__ref": "CommunityQuestion:UlcFhf0kfTolpcMfU6VKDQ"
+            }
+          },
+          {
+            "__typename": "CommunityQuestionEdge",
+            "node": {
+              "__ref": "CommunityQuestion:ubtlph-vupLsdNoBTB2aKA"
+            }
+          },
+          {
+            "__typename": "CommunityQuestionEdge",
+            "node": {
+              "__ref": "CommunityQuestion:cjkCs3a3HxEJpD53Asc_9w"
+            }
+          },
+          {
+            "__typename": "CommunityQuestionEdge",
+            "node": {
+              "__ref": "CommunityQuestion:2BC-SszMlfHrbwiLmbd-TA"
+            }
+          }
+        ]
+      },
+      "suggestedQuestionTextFromSearchContext({\"searchContextId\":\"f92f0309968d0233\"})": "Any pizza places that do late-night service around town?"
+    },
+    "searchPage({\"searchContextId\":\"f92f0309968d0233\",\"uniqueRequestId\":\"f92f0309968d0233\"})": {
+      "__typename": "SearchPage",
+      "preSearchContext": {
+        "__typename": "PreSearchContext",
+        "locationInfo": {
+          "__typename": "GenericLocation",
+          "city": "New York",
+          "country": "US",
+          "state": "NY"
+        },
+        "nameMatchIntentProbability": "LOW",
+        "query": "pizza"
+      }
+    },
+    "businesses({\"encids\":[\"oOr6Ta5gZyDl6PyZ1cq7pg\",\"uktq_wgbnvUBEtFxg_-qVA\",\"AxlPdeoKHO0aSH3pSNICrQ\",\"vpkTNjq9dRh9rT3Nh0pe-A\",\"dc3hkLkAqCSxDWQzrx-g9A\",\"bZp_owBPwvAtYydSwWZdGg\"]})": [
+      {
+        "__ref": "Business:oOr6Ta5gZyDl6PyZ1cq7pg"
+      },
+      {
+        "__ref": "Business:uktq_wgbnvUBEtFxg_-qVA"
+      },
+      {
+        "__ref": "Business:AxlPdeoKHO0aSH3pSNICrQ"
+      },
+      {
+        "__ref": "Business:vpkTNjq9dRh9rT3Nh0pe-A"
+      },
+      {
+        "__ref": "Business:dc3hkLkAqCSxDWQzrx-g9A"
+      },
+      {
+        "__ref": "Business:bZp_owBPwvAtYydSwWZdGg"
+      }
+    ],
+    "businesses({\"encids\":[\"AxlPdeoKHO0aSH3pSNICrQ\",\"oOr6Ta5gZyDl6PyZ1cq7pg\",\"vpkTNjq9dRh9rT3Nh0pe-A\"]})": [
+      {
+        "__ref": "Business:AxlPdeoKHO0aSH3pSNICrQ"
+      },
+      {
+        "__ref": "Business:oOr6Ta5gZyDl6PyZ1cq7pg"
+      },
+      {
+        "__ref": "Business:vpkTNjq9dRh9rT3Nh0pe-A"
+      }
+    ],
+    "businesses({\"encids\":[\"uktq_wgbnvUBEtFxg_-qVA\"]})": [
+      {
+        "__ref": "Business:uktq_wgbnvUBEtFxg_-qVA"
+      }
+    ],
+    "businesses({\"encids\":[\"G9hV4H2iGpWD8RoUpjtokg\",\"ysqgdbSrezXgVwER2kQWKA\",\"KEEXuHCYhsQJ-zpJhu98bA\",\"v1DHGRNCH9247WLYoaoA9A\",\"zj8Lq1T8KIC5zwFief15jg\",\"WG639VkTjmK5dzydd1BBJA\",\"uc5qQMzs96rzjK27epDCug\",\"LF1QAuvpfX7KGQlg2zMg6Q\",\"AxlPdeoKHO0aSH3pSNICrQ\",\"HhckmaA59cg3WrZHTWwN3A\"]})": [
+      {
+        "__ref": "Business:G9hV4H2iGpWD8RoUpjtokg"
+      },
+      {
+        "__ref": "Business:ysqgdbSrezXgVwER2kQWKA"
+      },
+      {
+        "__ref": "Business:KEEXuHCYhsQJ-zpJhu98bA"
+      },
+      {
+        "__ref": "Business:v1DHGRNCH9247WLYoaoA9A"
+      },
+      {
+        "__ref": "Business:zj8Lq1T8KIC5zwFief15jg"
+      },
+      {
+        "__ref": "Business:WG639VkTjmK5dzydd1BBJA"
+      },
+      {
+        "__ref": "Business:uc5qQMzs96rzjK27epDCug"
+      },
+      {
+        "__ref": "Business:LF1QAuvpfX7KGQlg2zMg6Q"
+      },
+      {
+        "__ref": "Business:AxlPdeoKHO0aSH3pSNICrQ"
+      },
+      {
+        "__ref": "Business:HhckmaA59cg3WrZHTWwN3A"
+      }
+    ]
+  },
+  "UserProfilePhoto:ucAVknnZDEENPvKY_lBTyQ": {
+    "__typename": "UserProfilePhoto",
+    "encid": "ucAVknnZDEENPvKY_lBTyQ",
+    "photoUrl": {
+      "__typename": "UserPhotoUrl",
+      "url({\"size\":\"SQUARE_60\"})": "https://s3-media0.fl.yelpcdn.com/photo/ucAVknnZDEENPvKY_lBTyQ/60s.jpg",
+      "url({\"size\":\"SQUARE_120\"})": "https://s3-media0.fl.yelpcdn.com/photo/ucAVknnZDEENPvKY_lBTyQ/120s.jpg",
+      "url({\"size\":\"SQUARE_180\"})": "https://s3-media0.fl.yelpcdn.com/photo/ucAVknnZDEENPvKY_lBTyQ/180s.jpg"
+    }
+  },
+  "User:SsNKFDRCYTSjZeFeQ52P6Q": {
+    "__typename": "User",
+    "encid": "SsNKFDRCYTSjZeFeQ52P6Q",
+    "displayName": "Hans M.",
+    "displayLocation": "Richmond, VA",
+    "currentTruncatedEliteYear": null,
+    "isEliteAllStar({\"sourceFlow\":\"common\"})": null,
+    "profilePhoto": {
+      "__ref": "UserProfilePhoto:ucAVknnZDEENPvKY_lBTyQ"
+    },
+    "reviewCount": 8,
+    "friendCount": 49,
+    "businessPhotoCount": 2
+  },
+  "UserProfilePhoto:_XFDAJWUW44BF6h6i-zi1w": {
+    "__typename": "UserProfilePhoto",
+    "encid": "_XFDAJWUW44BF6h6i-zi1w",
+    "photoUrl": {
+      "__typename": "UserPhotoUrl",
+      "url({\"size\":\"SQUARE_60\"})": "https://s3-media0.fl.yelpcdn.com/photo/_XFDAJWUW44BF6h6i-zi1w/60s.jpg",
+      "url({\"size\":\"SQUARE_120\"})": "https://s3-media0.fl.yelpcdn.com/photo/_XFDAJWUW44BF6h6i-zi1w/120s.jpg"
+    }
+  },
+  "User:EnmFPqKiouqCuE9yR7q1ag": {
+    "__typename": "User",
+    "encid": "EnmFPqKiouqCuE9yR7q1ag",
+    "displayName": "Daniel G.",
+    "profilePhoto": {
+      "__ref": "UserProfilePhoto:_XFDAJWUW44BF6h6i-zi1w"
+    }
+  },
+  "CommunityAnswer:0H6CgVnZeY0pMdLOo--89Q": {
+    "__typename": "CommunityAnswer",
+    "encid": "0H6CgVnZeY0pMdLOo--89Q",
+    "highlightedText": "L\u2019 Industrie in SoHo, West Village or in Williamsburg",
+    "author": {
+      "__ref": "User:EnmFPqKiouqCuE9yR7q1ag"
+    }
+  },
+  "CommunityQuestion:HhzQysu2dUyOj3yvX1uhWg": {
+    "__typename": "CommunityQuestion",
+    "encid": "HhzQysu2dUyOj3yvX1uhWg",
+    "text": "What are the top-rated places for New York style pizzas (not too touristy; has hipster/chic interior design; authentic New York style pizza)",
+    "createdAt": {
+      "__typename": "DateTime",
+      "utcDateTime": "2026-06-16T13:50:51Z"
+    },
+    "author": {
+      "__ref": "User:SsNKFDRCYTSjZeFeQ52P6Q"
+    },
+    "answers": {
+      "__typename": "CommunityAnswerConnection",
+      "totalCount": 2
+    },
+    "topAnswer": {
+      "__ref": "CommunityAnswer:0H6CgVnZeY0pMdLOo--89Q"
+    }
+  },
+  "User:G5N5-pV47uNEDkbERG00gg": {
+    "__typename": "User",
+    "encid": "G5N5-pV47uNEDkbERG00gg",
+    "displayName": "William R.",
+    "displayLocation": "Albuquerque, NM",
+    "currentTruncatedEliteYear": null,
+    "isEliteAllStar({\"sourceFlow\":\"common\"})": null,
+    "profilePhoto": null,
+    "reviewCount": 0,
+    "friendCount": 0,
+    "businessPhotoCount": 0
+  },
+  "UserProfilePhoto:1nuB9XfWQK6vja3B9yf5WA": {
+    "__typename": "UserProfilePhoto",
+    "encid": "1nuB9XfWQK6vja3B9yf5WA",
+    "photoUrl": {
+      "__typename": "UserPhotoUrl",
+      "url({\"size\":\"SQUARE_60\"})": "https://s3-media0.fl.yelpcdn.com/photo/1nuB9XfWQK6vja3B9yf5WA/60s.jpg",
+      "url({\"size\":\"SQUARE_120\"})": "https://s3-media0.fl.yelpcdn.com/photo/1nuB9XfWQK6vja3B9yf5WA/120s.jpg"
+    }
+  },
+  "User:Asgk0Sz2IbK3RTI2SwmVQg": {
+    "__typename": "User",
+    "encid": "Asgk0Sz2IbK3RTI2SwmVQg",
+    "displayName": "Adam M.",
+    "profilePhoto": {
+      "__ref": "UserProfilePhoto:1nuB9XfWQK6vja3B9yf5WA"
+    }
+  },
+  "CommunityAnswer:tW74Su5-r7-rA7mVNiLpcw": {
+    "__typename": "CommunityAnswer",
+    "encid": "tW74Su5-r7-rA7mVNiLpcw",
+    "highlightedText": "Chicago style can be found at [[HIGHLIGHT]]Emmett's[[ENDHIGHLIGHT]]",
+    "author": {
+      "__ref": "User:Asgk0Sz2IbK3RTI2SwmVQg"
+    }
+  },
+  "CommunityQuestion:xrv3DcyASxXSpnoUh3AXsg": {
+    "__typename": "CommunityQuestion",
+    "encid": "xrv3DcyASxXSpnoUh3AXsg",
+    "text": "Where to find New York or Chicago style pizza locally?",
+    "createdAt": {
+      "__typename": "DateTime",
+      "utcDateTime": "2026-06-15T16:07:07Z"
+    },
+    "author": {
+      "__ref": "User:G5N5-pV47uNEDkbERG00gg"
+    },
+    "answers": {
+      "__typename": "CommunityAnswerConnection",
+      "totalCount": 1
+    },
+    "topAnswer": {
+      "__ref": "CommunityAnswer:tW74Su5-r7-rA7mVNiLpcw"
+    }
+  },
+  "User:k3kYiiHPnpWDAoeLqDm-Tg": {
+    "__typename": "User",
+    "encid": "k3kYiiHPnpWDAoeLqDm-Tg",
+    "displayName": "Paula G.",
+    "displayLocation": "Grover Beach, CA",
+    "currentTruncatedEliteYear": null,
+    "isEliteAllStar({\"sourceFlow\":\"common\"})": null,
+    "profilePhoto": null,
+    "reviewCount": 30,
+    "friendCount": 53,
+    "businessPhotoCount": 7
+  },
+  "UserProfilePhoto:3vDalMzurzdCVSNgjUb9eQ": {
+    "__typename": "UserProfilePhoto",
+    "encid": "3vDalMzurzdCVSNgjUb9eQ",
+    "photoUrl": {
+      "__typename": "UserPhotoUrl",
+      "url({\"size\":\"SQUARE_60\"})": "https://s3-media0.fl.yelpcdn.com/photo/3vDalMzurzdCVSNgjUb9eQ/60s.jpg",
+      "url({\"size\":\"SQUARE_120\"})": "https://s3-media0.fl.yelpcdn.com/photo/3vDalMzurzdCVSNgjUb9eQ/120s.jpg"
+    }
+  },
+  "User:HFAluBnE4eezPwcZGw3mdw": {
+    "__typename": "User",
+    "encid": "HFAluBnE4eezPwcZGw3mdw",
+    "displayName": "SuperFly W.",
+    "profilePhoto": {
+      "__ref": "UserProfilePhoto:3vDalMzurzdCVSNgjUb9eQ"
+    }
+  },
+  "CommunityAnswer:5nKsuDoWazCynwzS00TraA": {
+    "__typename": "CommunityAnswer",
+    "encid": "5nKsuDoWazCynwzS00TraA",
+    "highlightedText": "Around where? \ud83d\ude02",
+    "author": {
+      "__ref": "User:HFAluBnE4eezPwcZGw3mdw"
+    }
+  },
+  "CommunityQuestion:5sWK9csLGEdq2eq6B7NSUw": {
+    "__typename": "CommunityQuestion",
+    "encid": "5sWK9csLGEdq2eq6B7NSUw",
+    "text": "Looking for pizza with great crust and toppings around here, any suggestions?",
+    "createdAt": {
+      "__typename": "DateTime",
+      "utcDateTime": "2026-06-14T22:30:03Z"
+    },
+    "author": {
+      "__ref": "User:k3kYiiHPnpWDAoeLqDm-Tg"
+    },
+    "answers": {
+      "__typename": "CommunityAnswerConnection",
+      "totalCount": 1
+    },
+    "topAnswer": {
+      "__ref": "CommunityAnswer:5nKsuDoWazCynwzS00TraA"
+    }
+  },
+  "User:NougbycTo1rObcXg1N_tDg": {
+    "__typename": "User",
+    "encid": "NougbycTo1rObcXg1N_tDg",
+    "displayName": "Irving S.",
+    "displayLocation": "Upper West Side, New York, NY",
+    "currentTruncatedEliteYear": null,
+    "isEliteAllStar({\"sourceFlow\":\"common\"})": null,
+    "profilePhoto": null,
+    "reviewCount": 0,
+    "friendCount": 0,
+    "businessPhotoCount": 0
+  },
+  "User:vQmGS0ONfV6YboPb7JagoQ": {
+    "__typename": "User",
+    "encid": "vQmGS0ONfV6YboPb7JagoQ",
+    "displayName": "Ig L.",
+    "profilePhoto": null
+  },
+  "CommunityAnswer:kGzbTw6cWnbM6kgAJ0DBoA": {
+    "__typename": "CommunityAnswer",
+    "encid": "kGzbTw6cWnbM6kgAJ0DBoA",
+    "highlightedText": "Don Angie, Via Carota, Carmines, Carbone,",
+    "author": {
+      "__ref": "User:vQmGS0ONfV6YboPb7JagoQ"
+    }
+  },
+  "CommunityQuestion:jWIoOuZIVgDYLZH4z99KCw": {
+    "__typename": "CommunityQuestion",
+    "encid": "jWIoOuZIVgDYLZH4z99KCw",
+    "text": "What are some Italian restaurants with great pasta dishes?",
+    "createdAt": {
+      "__typename": "DateTime",
+      "utcDateTime": "2026-06-10T18:27:03Z"
+    },
+    "author": {
+      "__ref": "User:NougbycTo1rObcXg1N_tDg"
+    },
+    "answers": {
+      "__typename": "CommunityAnswerConnection",
+      "totalCount": 1
+    },
+    "topAnswer": {
+      "__ref": "CommunityAnswer:kGzbTw6cWnbM6kgAJ0DBoA"
+    }
+  },
+  "User:3wKj_CVWxqh55hZLVDYkeg": {
+    "__typename": "User",
+    "encid": "3wKj_CVWxqh55hZLVDYkeg",
+    "displayName": "Jacquelyn B.",
+    "displayLocation": "Brentwood, CA",
+    "currentTruncatedEliteYear": null,
+    "isEliteAllStar({\"sourceFlow\":\"common\"})": null,
+    "profilePhoto": null,
+    "reviewCount": 8,
+    "friendCount": 215,
+    "businessPhotoCount": 0
+  },
+  "User:Acx96hdAdpgfsZPBhv8u8w": {
+    "__typename": "User",
+    "encid": "Acx96hdAdpgfsZPBhv8u8w",
+    "displayName": "Colin K.",
+    "profilePhoto": null
+  },
+  "CommunityAnswer:6QGpDjg0Sv5wHxkgoxeLVQ": {
+    "__typename": "CommunityAnswer",
+    "encid": "6QGpDjg0Sv5wHxkgoxeLVQ",
+    "highlightedText": "Very unsanitary. There was a tall Indian women serving doubles visibly sweaty with noticeable body odor .",
+    "author": {
+      "__ref": "User:Acx96hdAdpgfsZPBhv8u8w"
+    }
+  },
+  "CommunityQuestion:DXmQuMNaJupKYmpVfC1Nzw": {
+    "__typename": "CommunityQuestion",
+    "encid": "DXmQuMNaJupKYmpVfC1Nzw",
+    "text": "Suggestions for a mom and pop Italian restaurants ",
+    "createdAt": {
+      "__typename": "DateTime",
+      "utcDateTime": "2026-06-04T21:11:13Z"
+    },
+    "author": {
+      "__ref": "User:3wKj_CVWxqh55hZLVDYkeg"
+    },
+    "answers": {
+      "__typename": "CommunityAnswerConnection",
+      "totalCount": 1
+    },
+    "topAnswer": {
+      "__ref": "CommunityAnswer:6QGpDjg0Sv5wHxkgoxeLVQ"
+    }
+  },
+  "User:7iVWiNfcwTPq2tj_JM0r7g": {
+    "__typename": "User",
+    "encid": "7iVWiNfcwTPq2tj_JM0r7g",
+    "displayName": "Sasank R.",
+    "displayLocation": "San Francisco, CA",
+    "currentTruncatedEliteYear": null,
+    "isEliteAllStar({\"sourceFlow\":\"common\"})": null,
+    "profilePhoto": null,
+    "reviewCount": 0,
+    "friendCount": 90,
+    "businessPhotoCount": 0
+  },
+  "UserProfilePhoto:bFrGl_FbSNyDDZ9N5s6IQQ": {
+    "__typename": "UserProfilePhoto",
+    "encid": "bFrGl_FbSNyDDZ9N5s6IQQ",
+    "photoUrl": {
+      "__typename": "UserPhotoUrl",
+      "url({\"size\":\"SQUARE_60\"})": "https://s3-media0.fl.yelpcdn.com/photo/bFrGl_FbSNyDDZ9N5s6IQQ/60s.jpg",
+      "url({\"size\":\"SQUARE_120\"})": "https://s3-media0.fl.yelpcdn.com/photo/bFrGl_FbSNyDDZ9N5s6IQQ/120s.jpg"
+    }
+  },
+  "User:ycsIL_jRCIWWQQjulPqJwA": {
+    "__typename": "User",
+    "encid": "ycsIL_jRCIWWQQjulPqJwA",
+    "displayName": "Bailey R.",
+    "profilePhoto": {
+      "__ref": "UserProfilePhoto:bFrGl_FbSNyDDZ9N5s6IQQ"
+    }
+  },
+  "CommunityAnswer:nWv2n08hg8WD-0OAxMw8cw": {
+    "__typename": "CommunityAnswer",
+    "encid": "nWv2n08hg8WD-0OAxMw8cw",
+    "highlightedText": "Jersey City. I\u2019ve tried 3 different places in Manhattan so far and NONE of them are even close to good. (My husband is Indian so we prefer authentic taste). However, Jersey City has great ones! Especially on the \u201clittle India\u201d street, not far from Journal Square.",
+    "author": {
+      "__ref": "User:ycsIL_jRCIWWQQjulPqJwA"
+    }
+  },
+  "CommunityQuestion:BMPP5zhl6PVRgppk3wwtVg": {
+    "__typename": "CommunityQuestion",
+    "encid": "BMPP5zhl6PVRgppk3wwtVg",
+    "text": "Kati rolls?",
+    "createdAt": {
+      "__typename": "DateTime",
+      "utcDateTime": "2026-06-03T00:47:22Z"
+    },
+    "author": {
+      "__ref": "User:7iVWiNfcwTPq2tj_JM0r7g"
+    },
+    "answers": {
+      "__typename": "CommunityAnswerConnection",
+      "totalCount": 2
+    },
+    "topAnswer": {
+      "__ref": "CommunityAnswer:nWv2n08hg8WD-0OAxMw8cw"
+    }
+  },
+  "User:TN--w6B7ZZ9ozb_o7lAseg": {
+    "__typename": "User",
+    "encid": "TN--w6B7ZZ9ozb_o7lAseg",
+    "displayName": "Andrea Dawn L.",
+    "displayLocation": "Bridgeport, CT",
+    "currentTruncatedEliteYear": null,
+    "isEliteAllStar({\"sourceFlow\":\"common\"})": null,
+    "profilePhoto": null,
+    "reviewCount": 6,
+    "friendCount": 0,
+    "businessPhotoCount": 3
+  },
+  "UserProfilePhoto:9KYRPoFAfUgp2fqX30FTfA": {
+    "__typename": "UserProfilePhoto",
+    "encid": "9KYRPoFAfUgp2fqX30FTfA",
+    "photoUrl": {
+      "__typename": "UserPhotoUrl",
+      "url({\"size\":\"SQUARE_60\"})": "https://s3-media0.fl.yelpcdn.com/photo/9KYRPoFAfUgp2fqX30FTfA/60s.jpg",
+      "url({\"size\":\"SQUARE_120\"})": "https://s3-media0.fl.yelpcdn.com/photo/9KYRPoFAfUgp2fqX30FTfA/120s.jpg"
+    }
+  },
+  "User:_KOoW-YUp2JVpa9dZ-56hg": {
+    "__typename": "User",
+    "encid": "_KOoW-YUp2JVpa9dZ-56hg",
+    "displayName": "G G.",
+    "profilePhoto": {
+      "__ref": "UserProfilePhoto:9KYRPoFAfUgp2fqX30FTfA"
+    }
+  },
+  "CommunityAnswer:V0UWlFLepkC0Ig55TMlfAA": {
+    "__typename": "CommunityAnswer",
+    "encid": "V0UWlFLepkC0Ig55TMlfAA",
+    "highlightedText": "Little Italy",
+    "author": {
+      "__ref": "User:_KOoW-YUp2JVpa9dZ-56hg"
+    }
+  },
+  "CommunityQuestion:UlcFhf0kfTolpcMfU6VKDQ": {
+    "__typename": "CommunityQuestion",
+    "encid": "UlcFhf0kfTolpcMfU6VKDQ",
+    "text": "Looking for Italian spots known for fresh ingredients, any thoughts?",
+    "createdAt": {
+      "__typename": "DateTime",
+      "utcDateTime": "2026-06-01T03:01:47Z"
+    },
+    "author": {
+      "__ref": "User:TN--w6B7ZZ9ozb_o7lAseg"
+    },
+    "answers": {
+      "__typename": "CommunityAnswerConnection",
+      "totalCount": 1
+    },
+    "topAnswer": {
+      "__ref": "CommunityAnswer:V0UWlFLepkC0Ig55TMlfAA"
+    }
+  },
+  "User:s-o-4syOH5VeH_PHN7lN0Q": {
+    "__typename": "User",
+    "encid": "s-o-4syOH5VeH_PHN7lN0Q",
+    "displayName": "Mackenzie S.",
+    "displayLocation": "Queens, NY",
+    "currentTruncatedEliteYear": null,
+    "isEliteAllStar({\"sourceFlow\":\"common\"})": null,
+    "profilePhoto": null,
+    "reviewCount": 0,
+    "friendCount": 0,
+    "businessPhotoCount": 0
+  },
+  "UserProfilePhoto:OroWbLVbLE4s9kMPDw2thw": {
+    "__typename": "UserProfilePhoto",
+    "encid": "OroWbLVbLE4s9kMPDw2thw",
+    "photoUrl": {
+      "__typename": "UserPhotoUrl",
+      "url({\"size\":\"SQUARE_60\"})": "https://s3-media0.fl.yelpcdn.com/photo/OroWbLVbLE4s9kMPDw2thw/60s.jpg",
+      "url({\"size\":\"SQUARE_120\"})": "https://s3-media0.fl.yelpcdn.com/photo/OroWbLVbLE4s9kMPDw2thw/120s.jpg"
+    }
+  },
+  "User:9-5XsyJzlIkc3xMCa7gOpA": {
+    "__typename": "User",
+    "encid": "9-5XsyJzlIkc3xMCa7gOpA",
+    "displayName": "Linda B.",
+    "profilePhoto": {
+      "__ref": "UserProfilePhoto:OroWbLVbLE4s9kMPDw2thw"
+    }
+  },
+  "CommunityAnswer:67tUYddjTd7V-bcG0t6CHg": {
+    "__typename": "CommunityAnswer",
+    "encid": "67tUYddjTd7V-bcG0t6CHg",
+    "highlightedText": "Delmonico\u2019s",
+    "author": {
+      "__ref": "User:9-5XsyJzlIkc3xMCa7gOpA"
+    }
+  },
+  "CommunityQuestion:ubtlph-vupLsdNoBTB2aKA": {
+    "__typename": "CommunityQuestion",
+    "encid": "ubtlph-vupLsdNoBTB2aKA",
+    "text": "Looking for high end Italian or steak restaurants in the financial district for a company dinner of 6",
+    "createdAt": {
+      "__typename": "DateTime",
+      "utcDateTime": "2026-05-30T01:17:39Z"
+    },
+    "author": {
+      "__ref": "User:s-o-4syOH5VeH_PHN7lN0Q"
+    },
+    "answers": {
+      "__typename": "CommunityAnswerConnection",
+      "totalCount": 6
+    },
+    "topAnswer": {
+      "__ref": "CommunityAnswer:67tUYddjTd7V-bcG0t6CHg"
+    }
+  },
+  "User:iDuRhcVafRANOtNBfOSaOQ": {
+    "__typename": "User",
+    "encid": "iDuRhcVafRANOtNBfOSaOQ",
+    "displayName": "Arvilla K.",
+    "displayLocation": "Metairie, LA",
+    "currentTruncatedEliteYear": null,
+    "isEliteAllStar({\"sourceFlow\":\"common\"})": null,
+    "profilePhoto": null,
+    "reviewCount": 0,
+    "friendCount": 0,
+    "businessPhotoCount": 0
+  },
+  "UserProfilePhoto:shzeoUxUPPVTqXcJNazWSw": {
+    "__typename": "UserProfilePhoto",
+    "encid": "shzeoUxUPPVTqXcJNazWSw",
+    "photoUrl": {
+      "__typename": "UserPhotoUrl",
+      "url({\"size\":\"SQUARE_60\"})": "https://s3-media0.fl.yelpcdn.com/photo/shzeoUxUPPVTqXcJNazWSw/60s.jpg",
+      "url({\"size\":\"SQUARE_120\"})": "https://s3-media0.fl.yelpcdn.com/photo/shzeoUxUPPVTqXcJNazWSw/120s.jpg"
+    }
+  },
+  "User:FP5g6Yl2uSX5emTCIdAV6Q": {
+    "__typename": "User",
+    "encid": "FP5g6Yl2uSX5emTCIdAV6Q",
+    "displayName": "Yudelka S.",
+    "profilePhoto": {
+      "__ref": "UserProfilePhoto:shzeoUxUPPVTqXcJNazWSw"
+    }
+  },
+  "CommunityAnswer:X3wPzFCY8p33ZcZZNdLOhg": {
+    "__typename": "CommunityAnswer",
+    "encid": "X3wPzFCY8p33ZcZZNdLOhg",
+    "highlightedText": "What's the question?",
+    "author": {
+      "__ref": "User:FP5g6Yl2uSX5emTCIdAV6Q"
+    }
+  },
+  "CommunityQuestion:cjkCs3a3HxEJpD53Asc_9w": {
+    "__typename": "CommunityQuestion",
+    "encid": "cjkCs3a3HxEJpD53Asc_9w",
+    "text": "Nonna Dora's Pasta Bar?",
+    "createdAt": {
+      "__typename": "DateTime",
+      "utcDateTime": "2026-05-26T23:11:49Z"
+    },
+    "author": {
+      "__ref": "User:iDuRhcVafRANOtNBfOSaOQ"
+    },
+    "answers": {
+      "__typename": "CommunityAnswerConnection",
+      "totalCount": 1
+    },
+    "topAnswer": {
+      "__ref": "CommunityAnswer:X3wPzFCY8p33ZcZZNdLOhg"
+    }
+  },
+  "User:2Z0rTH90U289FI0078ljtg": {
+    "__typename": "User",
+    "encid": "2Z0rTH90U289FI0078ljtg",
+    "displayName": "M J.",
+    "displayLocation": "Linden, MI",
+    "currentTruncatedEliteYear": null,
+    "isEliteAllStar({\"sourceFlow\":\"common\"})": null,
+    "profilePhoto": null,
+    "reviewCount": 22,
+    "friendCount": 0,
+    "businessPhotoCount": 0
+  },
+  "UserProfilePhoto:8jsSPxuaEjEPY1phI3VMVQ": {
+    "__typename": "UserProfilePhoto",
+    "encid": "8jsSPxuaEjEPY1phI3VMVQ",
+    "photoUrl": {
+      "__typename": "UserPhotoUrl",
+      "url({\"size\":\"SQUARE_60\"})": "https://s3-media0.fl.yelpcdn.com/photo/8jsSPxuaEjEPY1phI3VMVQ/60s.jpg",
+      "url({\"size\":\"SQUARE_120\"})": "https://s3-media0.fl.yelpcdn.com/photo/8jsSPxuaEjEPY1phI3VMVQ/120s.jpg"
+    }
+  },
+  "User:j7oiAFkYK3X9r1tDtAKPig": {
+    "__typename": "User",
+    "encid": "j7oiAFkYK3X9r1tDtAKPig",
+    "displayName": "Jazmin C.",
+    "profilePhoto": {
+      "__ref": "UserProfilePhoto:8jsSPxuaEjEPY1phI3VMVQ"
+    }
+  },
+  "CommunityAnswer:XNvHprlmlV445q09JXzV4g": {
+    "__typename": "CommunityAnswer",
+    "encid": "XNvHprlmlV445q09JXzV4g",
+    "highlightedText": "Serendipity 3 on 47th street extremely child friendly menu and atmosphere",
+    "author": {
+      "__ref": "User:j7oiAFkYK3X9r1tDtAKPig"
+    }
+  },
+  "CommunityQuestion:2BC-SszMlfHrbwiLmbd-TA": {
+    "__typename": "CommunityQuestion",
+    "encid": "2BC-SszMlfHrbwiLmbd-TA",
+    "text": "decent dinner restaurant around times square with a 10 year old",
+    "createdAt": {
+      "__typename": "DateTime",
+      "utcDateTime": "2026-05-07T19:18:15Z"
+    },
+    "author": {
+      "__ref": "User:2Z0rTH90U289FI0078ljtg"
+    },
+    "answers": {
+      "__typename": "CommunityAnswerConnection",
+      "totalCount": 2
+    },
+    "topAnswer": {
+      "__ref": "CommunityAnswer:XNvHprlmlV445q09JXzV4g"
+    }
+  },
+  "BusinessCategory:DfJmebdT8pOtdHPRcg00eQ": {
+    "__typename": "BusinessCategory",
+    "encid": "DfJmebdT8pOtdHPRcg00eQ",
+    "title": "Pizza"
+  },
+  "BusinessLocation:oOr6Ta5gZyDl6PyZ1cq7pg": {
+    "__typename": "BusinessLocation",
+    "encid": "oOr6Ta5gZyDl6PyZ1cq7pg",
+    "address": {
+      "__typename": "BusinessAddress",
+      "city": "New York",
+      "addressLine1": "145 1st Ave"
+    },
+    "neighborhoods": [
+      "East Village"
+    ]
+  },
+  "Business:oOr6Ta5gZyDl6PyZ1cq7pg": {
+    "__typename": "Business",
+    "encid": "oOr6Ta5gZyDl6PyZ1cq7pg",
+    "operationHours": {
+      "__typename": "OperationHours",
+      "timezone": "America/New_York",
+      "regularHoursMergedWithSpecialHoursForCurrentWeek": [
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              660,
+              1620
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              2100,
+              3060
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              3540,
+              4500
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              4980,
+              5940
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              6420,
+              7500
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              7860,
+              8940
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              9300,
+              180
+            ]
+          ]
+        }
+      ]
+    },
+    "alias": "east-village-pizza-new-york",
+    "name": "East Village Pizza",
+    "rating": 4.1,
+    "reviewCount": 668,
+    "alternateNames": [],
+    "categories": [
+      {
+        "__ref": "BusinessCategory:DfJmebdT8pOtdHPRcg00eQ"
+      }
+    ],
+    "priceRange": {
+      "__typename": "PriceRange",
+      "display": "$"
+    },
+    "location": {
+      "__ref": "BusinessLocation:oOr6Ta5gZyDl6PyZ1cq7pg"
+    },
+    "serviceArea": {
+      "__typename": "BusinessServiceArea",
+      "eligible": false,
+      "primaryLocation": null
+    },
+    "containerBusiness": null,
+    "activeAlert({\"deviceType\":\"WWW\"})": null,
+    "verifiedLicenses": [],
+    "yelpGuaranteed": {
+      "__typename": "YelpGuaranteed",
+      "enrolled": false
+    }
+  },
+  "BusinessCategory:c_Ra1Mpm4FiMUn6NORbQ7A": {
+    "__typename": "BusinessCategory",
+    "encid": "c_Ra1Mpm4FiMUn6NORbQ7A",
+    "title": "Pasta Shops"
+  },
+  "BusinessCategory:R9YcqQZGOjsUHpAJpAOnXg": {
+    "__typename": "BusinessCategory",
+    "encid": "R9YcqQZGOjsUHpAJpAOnXg",
+    "title": "Chicken Shop"
+  },
+  "BusinessLocation:uktq_wgbnvUBEtFxg_-qVA": {
+    "__typename": "BusinessLocation",
+    "encid": "uktq_wgbnvUBEtFxg_-qVA",
+    "address": {
+      "__typename": "BusinessAddress",
+      "city": "New York",
+      "addressLine1": "221 E 23rd St"
+    },
+    "neighborhoods": [
+      "Kips Bay"
+    ]
+  },
+  "Business:uktq_wgbnvUBEtFxg_-qVA": {
+    "__typename": "Business",
+    "encid": "uktq_wgbnvUBEtFxg_-qVA",
+    "operationHours": {
+      "__typename": "OperationHours",
+      "timezone": "America/New_York",
+      "regularHoursMergedWithSpecialHoursForCurrentWeek": [
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              600,
+              1350
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              2040,
+              2790
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              3480,
+              4230
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              4920,
+              5670
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              6360,
+              7110
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              7800,
+              8550
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": []
+        }
+      ]
+    },
+    "alias": "gleo-pizzeria-new-york",
+    "name": "Gleo Pizzeria",
+    "rating": 5,
+    "reviewCount": 3,
+    "alternateNames": [],
+    "categories": [
+      {
+        "__ref": "BusinessCategory:DfJmebdT8pOtdHPRcg00eQ"
+      },
+      {
+        "__ref": "BusinessCategory:c_Ra1Mpm4FiMUn6NORbQ7A"
+      },
+      {
+        "__ref": "BusinessCategory:R9YcqQZGOjsUHpAJpAOnXg"
+      }
+    ],
+    "priceRange": null,
+    "location": {
+      "__ref": "BusinessLocation:uktq_wgbnvUBEtFxg_-qVA"
+    },
+    "serviceArea": {
+      "__typename": "BusinessServiceArea",
+      "eligible": false,
+      "primaryLocation": null
+    },
+    "containerBusiness": null,
+    "activeAlert({\"deviceType\":\"WWW\"})": null,
+    "verifiedLicenses": [],
+    "yelpGuaranteed": {
+      "__typename": "YelpGuaranteed",
+      "enrolled": false
+    }
+  },
+  "BusinessLocation:AxlPdeoKHO0aSH3pSNICrQ": {
+    "__typename": "BusinessLocation",
+    "encid": "AxlPdeoKHO0aSH3pSNICrQ",
+    "address": {
+      "__typename": "BusinessAddress",
+      "city": "New York",
+      "addressLine1": "223 Avenue B"
+    },
+    "neighborhoods": [
+      "Alphabet City",
+      "East Village"
+    ]
+  },
+  "Business:AxlPdeoKHO0aSH3pSNICrQ": {
+    "__typename": "Business",
+    "encid": "AxlPdeoKHO0aSH3pSNICrQ",
+    "operationHours": {
+      "__typename": "OperationHours",
+      "timezone": "America/New_York",
+      "regularHoursMergedWithSpecialHoursForCurrentWeek": [
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              660,
+              1440
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              2100,
+              2880
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              3540,
+              4320
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              4980,
+              5820
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              6420,
+              7440
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              7860,
+              8880
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              9300,
+              0
+            ]
+          ]
+        }
+      ]
+    },
+    "alias": "pops-pizza-new-york-5",
+    "name": "Pop's Pizza",
+    "rating": 4.8,
+    "reviewCount": 55,
+    "alternateNames": [],
+    "categories": [
+      {
+        "__ref": "BusinessCategory:DfJmebdT8pOtdHPRcg00eQ"
+      }
+    ],
+    "priceRange": null,
+    "location": {
+      "__ref": "BusinessLocation:AxlPdeoKHO0aSH3pSNICrQ"
+    },
+    "serviceArea": {
+      "__typename": "BusinessServiceArea",
+      "eligible": false,
+      "primaryLocation": null
+    },
+    "containerBusiness": null,
+    "activeAlert({\"deviceType\":\"WWW\"})": null,
+    "verifiedLicenses": [],
+    "yelpGuaranteed": {
+      "__typename": "YelpGuaranteed",
+      "enrolled": false
+    }
+  },
+  "BusinessCategory:5ZXZY-abP_BhzhcrlgbaWQ": {
+    "__typename": "BusinessCategory",
+    "encid": "5ZXZY-abP_BhzhcrlgbaWQ",
+    "title": "Gluten-Free"
+  },
+  "BusinessCategory:0cY_o1NfhMim_RKHMM9fww": {
+    "__typename": "BusinessCategory",
+    "encid": "0cY_o1NfhMim_RKHMM9fww",
+    "title": "Italian"
+  },
+  "BusinessLocation:vpkTNjq9dRh9rT3Nh0pe-A": {
+    "__typename": "BusinessLocation",
+    "encid": "vpkTNjq9dRh9rT3Nh0pe-A",
+    "address": {
+      "__typename": "BusinessAddress",
+      "city": "New York",
+      "addressLine1": "68 Kenmare St"
+    },
+    "neighborhoods": [
+      "Nolita",
+      "Little Italy"
+    ]
+  },
+  "Business:vpkTNjq9dRh9rT3Nh0pe-A": {
+    "__typename": "Business",
+    "encid": "vpkTNjq9dRh9rT3Nh0pe-A",
+    "operationHours": {
+      "__typename": "OperationHours",
+      "timezone": "America/New_York",
+      "regularHoursMergedWithSpecialHoursForCurrentWeek": [
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              660,
+              1560
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              2100,
+              3000
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              3540,
+              4440
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              4980,
+              5940
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              6420,
+              7500
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              7860,
+              8940
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              9300,
+              120
+            ]
+          ]
+        }
+      ]
+    },
+    "alias": "nolita-pizza-new-york-2",
+    "name": "Nolita Pizza",
+    "rating": 4.5,
+    "reviewCount": 406,
+    "alternateNames": [],
+    "categories": [
+      {
+        "__ref": "BusinessCategory:DfJmebdT8pOtdHPRcg00eQ"
+      },
+      {
+        "__ref": "BusinessCategory:5ZXZY-abP_BhzhcrlgbaWQ"
+      },
+      {
+        "__ref": "BusinessCategory:0cY_o1NfhMim_RKHMM9fww"
+      }
+    ],
+    "priceRange": {
+      "__typename": "PriceRange",
+      "display": "$"
+    },
+    "location": {
+      "__ref": "BusinessLocation:vpkTNjq9dRh9rT3Nh0pe-A"
+    },
+    "serviceArea": {
+      "__typename": "BusinessServiceArea",
+      "eligible": false,
+      "primaryLocation": null
+    },
+    "containerBusiness": null,
+    "activeAlert({\"deviceType\":\"WWW\"})": null,
+    "verifiedLicenses": [],
+    "yelpGuaranteed": {
+      "__typename": "YelpGuaranteed",
+      "enrolled": false
+    }
+  },
+  "BusinessCategory:aEUnFZ2ZBMkxVerckI-vQw": {
+    "__typename": "BusinessCategory",
+    "encid": "aEUnFZ2ZBMkxVerckI-vQw",
+    "title": "Steakhouses"
+  },
+  "BusinessLocation:dc3hkLkAqCSxDWQzrx-g9A": {
+    "__typename": "BusinessLocation",
+    "encid": "dc3hkLkAqCSxDWQzrx-g9A",
+    "address": {
+      "__typename": "BusinessAddress",
+      "city": "New York",
+      "addressLine1": "57 W 57th St"
+    },
+    "neighborhoods": [
+      "Midtown West"
+    ]
+  },
+  "Business:dc3hkLkAqCSxDWQzrx-g9A": {
+    "__typename": "Business",
+    "encid": "dc3hkLkAqCSxDWQzrx-g9A",
+    "operationHours": {
+      "__typename": "OperationHours",
+      "timezone": "America/New_York",
+      "regularHoursMergedWithSpecialHoursForCurrentWeek": [
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              690,
+              900
+            ],
+            [
+              1020,
+              1380
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              2130,
+              2340
+            ],
+            [
+              2460,
+              2820
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              3570,
+              3780
+            ],
+            [
+              3900,
+              4260
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              5010,
+              5220
+            ],
+            [
+              5340,
+              5700
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              6450,
+              6660
+            ],
+            [
+              6780,
+              7140
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              7920,
+              8100
+            ],
+            [
+              8220,
+              8580
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              9360,
+              9540
+            ],
+            [
+              9660,
+              10020
+            ]
+          ]
+        }
+      ]
+    },
+    "alias": "quality-italian-new-york",
+    "name": "Quality Italian",
+    "rating": 4,
+    "reviewCount": 1671,
+    "alternateNames": [],
+    "categories": [
+      {
+        "__ref": "BusinessCategory:0cY_o1NfhMim_RKHMM9fww"
+      },
+      {
+        "__ref": "BusinessCategory:aEUnFZ2ZBMkxVerckI-vQw"
+      }
+    ],
+    "priceRange": {
+      "__typename": "PriceRange",
+      "display": "$$$"
+    },
+    "location": {
+      "__ref": "BusinessLocation:dc3hkLkAqCSxDWQzrx-g9A"
+    },
+    "serviceArea": {
+      "__typename": "BusinessServiceArea",
+      "eligible": false,
+      "primaryLocation": null
+    },
+    "containerBusiness": null,
+    "activeAlert({\"deviceType\":\"WWW\"})": null,
+    "verifiedLicenses": [],
+    "yelpGuaranteed": {
+      "__typename": "YelpGuaranteed",
+      "enrolled": false
+    }
+  },
+  "BusinessLocation:bZp_owBPwvAtYydSwWZdGg": {
+    "__typename": "BusinessLocation",
+    "encid": "bZp_owBPwvAtYydSwWZdGg",
+    "address": {
+      "__typename": "BusinessAddress",
+      "city": "New York",
+      "addressLine1": "102 Clinton St"
+    },
+    "neighborhoods": [
+      "Lower East Side"
+    ]
+  },
+  "Business:bZp_owBPwvAtYydSwWZdGg": {
+    "__typename": "Business",
+    "encid": "bZp_owBPwvAtYydSwWZdGg",
+    "operationHours": {
+      "__typename": "OperationHours",
+      "timezone": "America/New_York",
+      "regularHoursMergedWithSpecialHoursForCurrentWeek": [
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              660,
+              1500
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              2100,
+              2940
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              3540,
+              4380
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              4980,
+              5820
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              6420,
+              7500
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              7860,
+              8940
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              9300,
+              60
+            ]
+          ]
+        }
+      ]
+    },
+    "alias": "la-pizza-napoli-new-york",
+    "name": "La Pizza Napoli",
+    "rating": 3.3,
+    "reviewCount": 3,
+    "alternateNames": [],
+    "categories": [
+      {
+        "__ref": "BusinessCategory:DfJmebdT8pOtdHPRcg00eQ"
+      },
+      {
+        "__ref": "BusinessCategory:0cY_o1NfhMim_RKHMM9fww"
+      }
+    ],
+    "priceRange": null,
+    "location": {
+      "__ref": "BusinessLocation:bZp_owBPwvAtYydSwWZdGg"
+    },
+    "serviceArea": {
+      "__typename": "BusinessServiceArea",
+      "eligible": false,
+      "primaryLocation": null
+    },
+    "containerBusiness": null,
+    "activeAlert({\"deviceType\":\"WWW\"})": null,
+    "verifiedLicenses": [],
+    "yelpGuaranteed": {
+      "__typename": "YelpGuaranteed",
+      "enrolled": false
+    }
+  },
+  "BusinessLocation:G9hV4H2iGpWD8RoUpjtokg": {
+    "__typename": "BusinessLocation",
+    "encid": "G9hV4H2iGpWD8RoUpjtokg",
+    "address": {
+      "__typename": "BusinessAddress",
+      "city": "New York",
+      "addressLine1": "104 Christopher St"
+    },
+    "neighborhoods": [
+      "West Village"
+    ]
+  },
+  "Business:G9hV4H2iGpWD8RoUpjtokg": {
+    "__typename": "Business",
+    "encid": "G9hV4H2iGpWD8RoUpjtokg",
+    "operationHours": {
+      "__typename": "OperationHours",
+      "timezone": "America/New_York",
+      "regularHoursMergedWithSpecialHoursForCurrentWeek": [
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              720,
+              1320
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              2160,
+              2760
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              3600,
+              4200
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              5040,
+              5640
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              6480,
+              7080
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              7920,
+              8520
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              9360,
+              9960
+            ]
+          ]
+        }
+      ]
+    },
+    "alias": "l-industrie-pizzeria-new-york",
+    "name": "L\u2019industrie Pizzeria",
+    "rating": 4.5,
+    "reviewCount": 1129,
+    "alternateNames": [],
+    "categories": [
+      {
+        "__ref": "BusinessCategory:DfJmebdT8pOtdHPRcg00eQ"
+      }
+    ],
+    "priceRange": {
+      "__typename": "PriceRange",
+      "display": "$$"
+    },
+    "location": {
+      "__ref": "BusinessLocation:G9hV4H2iGpWD8RoUpjtokg"
+    },
+    "serviceArea": {
+      "__typename": "BusinessServiceArea",
+      "eligible": false,
+      "primaryLocation": null
+    },
+    "containerBusiness": null,
+    "activeAlert({\"deviceType\":\"WWW\"})": null,
+    "verifiedLicenses": [],
+    "yelpGuaranteed": {
+      "__typename": "YelpGuaranteed",
+      "enrolled": false
+    }
+  },
+  "BusinessLocation:ysqgdbSrezXgVwER2kQWKA": {
+    "__typename": "BusinessLocation",
+    "encid": "ysqgdbSrezXgVwER2kQWKA",
+    "address": {
+      "__typename": "BusinessAddress",
+      "city": "Brooklyn",
+      "addressLine1": "19 Old Fulton St"
+    },
+    "neighborhoods": [
+      "DUMBO"
+    ]
+  },
+  "Business:ysqgdbSrezXgVwER2kQWKA": {
+    "__typename": "Business",
+    "encid": "ysqgdbSrezXgVwER2kQWKA",
+    "operationHours": {
+      "__typename": "OperationHours",
+      "timezone": "America/New_York",
+      "regularHoursMergedWithSpecialHoursForCurrentWeek": [
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              690,
+              915
+            ],
+            [
+              960,
+              1260
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              2130,
+              2355
+            ],
+            [
+              2400,
+              2700
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              3570,
+              3795
+            ],
+            [
+              3840,
+              4140
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              5010,
+              5235
+            ],
+            [
+              5280,
+              5580
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              6450,
+              6675
+            ],
+            [
+              6720,
+              7020
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              7890,
+              8115
+            ],
+            [
+              8160,
+              8460
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              9330,
+              9555
+            ],
+            [
+              9600,
+              9900
+            ]
+          ]
+        }
+      ]
+    },
+    "alias": "julianas-brooklyn-3",
+    "name": "Juliana's",
+    "rating": 4.4,
+    "reviewCount": 2982,
+    "alternateNames": [],
+    "categories": [
+      {
+        "__ref": "BusinessCategory:DfJmebdT8pOtdHPRcg00eQ"
+      }
+    ],
+    "priceRange": {
+      "__typename": "PriceRange",
+      "display": "$$"
+    },
+    "location": {
+      "__ref": "BusinessLocation:ysqgdbSrezXgVwER2kQWKA"
+    },
+    "serviceArea": {
+      "__typename": "BusinessServiceArea",
+      "eligible": false,
+      "primaryLocation": null
+    },
+    "containerBusiness": null,
+    "activeAlert({\"deviceType\":\"WWW\"})": null,
+    "verifiedLicenses": [],
+    "yelpGuaranteed": {
+      "__typename": "YelpGuaranteed",
+      "enrolled": false
+    }
+  },
+  "BusinessLocation:KEEXuHCYhsQJ-zpJhu98bA": {
+    "__typename": "BusinessLocation",
+    "encid": "KEEXuHCYhsQJ-zpJhu98bA",
+    "address": {
+      "__typename": "BusinessAddress",
+      "city": "New York",
+      "addressLine1": "1435 Broadway"
+    },
+    "neighborhoods": [
+      "Theater District",
+      "Midtown West"
+    ]
+  },
+  "Business:KEEXuHCYhsQJ-zpJhu98bA": {
+    "__typename": "Business",
+    "encid": "KEEXuHCYhsQJ-zpJhu98bA",
+    "operationHours": {
+      "__typename": "OperationHours",
+      "timezone": "America/New_York",
+      "regularHoursMergedWithSpecialHoursForCurrentWeek": [
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              600,
+              1620
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              2040,
+              3060
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              3480,
+              4500
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              4920,
+              6000
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              6360,
+              7500
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              7800,
+              8940
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              9240,
+              180
+            ]
+          ]
+        }
+      ]
+    },
+    "alias": "joes-pizza-new-york-148",
+    "name": "Joe's Pizza",
+    "rating": 4.2,
+    "reviewCount": 2789,
+    "alternateNames": [],
+    "categories": [
+      {
+        "__ref": "BusinessCategory:DfJmebdT8pOtdHPRcg00eQ"
+      }
+    ],
+    "priceRange": {
+      "__typename": "PriceRange",
+      "display": "$"
+    },
+    "location": {
+      "__ref": "BusinessLocation:KEEXuHCYhsQJ-zpJhu98bA"
+    },
+    "serviceArea": {
+      "__typename": "BusinessServiceArea",
+      "eligible": false,
+      "primaryLocation": null
+    },
+    "containerBusiness": null,
+    "activeAlert({\"deviceType\":\"WWW\"})": null,
+    "verifiedLicenses": [],
+    "yelpGuaranteed": {
+      "__typename": "YelpGuaranteed",
+      "enrolled": false
+    }
+  },
+  "BusinessLocation:v1DHGRNCH9247WLYoaoA9A": {
+    "__typename": "BusinessLocation",
+    "encid": "v1DHGRNCH9247WLYoaoA9A",
+    "address": {
+      "__typename": "BusinessAddress",
+      "city": "Brooklyn",
+      "addressLine1": "254 S 2nd St"
+    },
+    "neighborhoods": [
+      "Williamsburg - South Side"
+    ]
+  },
+  "Business:v1DHGRNCH9247WLYoaoA9A": {
+    "__typename": "Business",
+    "encid": "v1DHGRNCH9247WLYoaoA9A",
+    "operationHours": {
+      "__typename": "OperationHours",
+      "timezone": "America/New_York",
+      "regularHoursMergedWithSpecialHoursForCurrentWeek": [
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              720,
+              1320
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              2160,
+              2760
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              3600,
+              4200
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              5040,
+              5640
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              6480,
+              7080
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              7920,
+              8520
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              9360,
+              9960
+            ]
+          ]
+        }
+      ]
+    },
+    "alias": "l-industrie-pizzeria-brooklyn",
+    "name": "L'industrie Pizzeria",
+    "rating": 4.6,
+    "reviewCount": 1833,
+    "alternateNames": [],
+    "categories": [
+      {
+        "__ref": "BusinessCategory:DfJmebdT8pOtdHPRcg00eQ"
+      }
+    ],
+    "priceRange": {
+      "__typename": "PriceRange",
+      "display": "$$"
+    },
+    "location": {
+      "__ref": "BusinessLocation:v1DHGRNCH9247WLYoaoA9A"
+    },
+    "serviceArea": {
+      "__typename": "BusinessServiceArea",
+      "eligible": false,
+      "primaryLocation": null
+    },
+    "containerBusiness": null,
+    "activeAlert({\"deviceType\":\"WWW\"})": null,
+    "verifiedLicenses": [],
+    "yelpGuaranteed": {
+      "__typename": "YelpGuaranteed",
+      "enrolled": false
+    }
+  },
+  "BusinessLocation:zj8Lq1T8KIC5zwFief15jg": {
+    "__typename": "BusinessLocation",
+    "encid": "zj8Lq1T8KIC5zwFief15jg",
+    "address": {
+      "__typename": "BusinessAddress",
+      "city": "New York",
+      "addressLine1": "27 Prince St"
+    },
+    "neighborhoods": [
+      "Nolita"
+    ]
+  },
+  "Business:zj8Lq1T8KIC5zwFief15jg": {
+    "__typename": "Business",
+    "encid": "zj8Lq1T8KIC5zwFief15jg",
+    "operationHours": {
+      "__typename": "OperationHours",
+      "timezone": "America/New_York",
+      "regularHoursMergedWithSpecialHoursForCurrentWeek": [
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              600,
+              1620
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              2040,
+              3060
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              3480,
+              4320
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              4920,
+              6060
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              6360,
+              7500
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              7800,
+              8940
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              9240,
+              180
+            ]
+          ]
+        }
+      ]
+    },
+    "alias": "prince-street-pizza-new-york-2",
+    "name": "Prince Street Pizza",
+    "rating": 4.3,
+    "reviewCount": 5689,
+    "alternateNames": [],
+    "categories": [
+      {
+        "__ref": "BusinessCategory:DfJmebdT8pOtdHPRcg00eQ"
+      }
+    ],
+    "priceRange": {
+      "__typename": "PriceRange",
+      "display": "$"
+    },
+    "location": {
+      "__ref": "BusinessLocation:zj8Lq1T8KIC5zwFief15jg"
+    },
+    "serviceArea": {
+      "__typename": "BusinessServiceArea",
+      "eligible": false,
+      "primaryLocation": null
+    },
+    "containerBusiness": null,
+    "activeAlert({\"deviceType\":\"WWW\"})": null,
+    "verifiedLicenses": [],
+    "yelpGuaranteed": {
+      "__typename": "YelpGuaranteed",
+      "enrolled": false
+    }
+  },
+  "BusinessLocation:WG639VkTjmK5dzydd1BBJA": {
+    "__typename": "BusinessLocation",
+    "encid": "WG639VkTjmK5dzydd1BBJA",
+    "address": {
+      "__typename": "BusinessAddress",
+      "city": "New York",
+      "addressLine1": "235 Mulberry St"
+    },
+    "neighborhoods": [
+      "Nolita"
+    ]
+  },
+  "Business:WG639VkTjmK5dzydd1BBJA": {
+    "__typename": "Business",
+    "encid": "WG639VkTjmK5dzydd1BBJA",
+    "operationHours": {
+      "__typename": "OperationHours",
+      "timezone": "America/New_York",
+      "regularHoursMergedWithSpecialHoursForCurrentWeek": [
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              660,
+              1380
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              2100,
+              2820
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              3540,
+              4260
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              4980,
+              5700
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              6420,
+              7140
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              7860,
+              8580
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              9300,
+              10020
+            ]
+          ]
+        }
+      ]
+    },
+    "alias": "rubirosa-new-york-2",
+    "name": "Rubirosa",
+    "rating": 4.3,
+    "reviewCount": 3770,
+    "alternateNames": [],
+    "categories": [
+      {
+        "__ref": "BusinessCategory:0cY_o1NfhMim_RKHMM9fww"
+      },
+      {
+        "__ref": "BusinessCategory:DfJmebdT8pOtdHPRcg00eQ"
+      }
+    ],
+    "priceRange": {
+      "__typename": "PriceRange",
+      "display": "$$"
+    },
+    "location": {
+      "__ref": "BusinessLocation:WG639VkTjmK5dzydd1BBJA"
+    },
+    "serviceArea": {
+      "__typename": "BusinessServiceArea",
+      "eligible": false,
+      "primaryLocation": null
+    },
+    "containerBusiness": null,
+    "activeAlert({\"deviceType\":\"WWW\"})": null,
+    "verifiedLicenses": [],
+    "yelpGuaranteed": {
+      "__typename": "YelpGuaranteed",
+      "enrolled": false
+    }
+  },
+  "BusinessLocation:uc5qQMzs96rzjK27epDCug": {
+    "__typename": "BusinessLocation",
+    "encid": "uc5qQMzs96rzjK27epDCug",
+    "address": {
+      "__typename": "BusinessAddress",
+      "city": "New York",
+      "addressLine1": "7 Carmine St"
+    },
+    "neighborhoods": [
+      "West Village"
+    ]
+  },
+  "Business:uc5qQMzs96rzjK27epDCug": {
+    "__typename": "Business",
+    "encid": "uc5qQMzs96rzjK27epDCug",
+    "operationHours": {
+      "__typename": "OperationHours",
+      "timezone": "America/New_York",
+      "regularHoursMergedWithSpecialHoursForCurrentWeek": [
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              600,
+              1620
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              2040,
+              3060
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              3480,
+              4500
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              4920,
+              5940
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              6360,
+              7440
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              7800,
+              8880
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              9240,
+              180
+            ]
+          ]
+        }
+      ]
+    },
+    "alias": "joes-pizza-new-york-4",
+    "name": "Joe's Pizza",
+    "rating": 4.1,
+    "reviewCount": 3410,
+    "alternateNames": [],
+    "categories": [
+      {
+        "__ref": "BusinessCategory:DfJmebdT8pOtdHPRcg00eQ"
+      }
+    ],
+    "priceRange": {
+      "__typename": "PriceRange",
+      "display": "$"
+    },
+    "location": {
+      "__ref": "BusinessLocation:uc5qQMzs96rzjK27epDCug"
+    },
+    "serviceArea": {
+      "__typename": "BusinessServiceArea",
+      "eligible": false,
+      "primaryLocation": null
+    },
+    "containerBusiness": null,
+    "activeAlert({\"deviceType\":\"WWW\"})": null,
+    "verifiedLicenses": [],
+    "yelpGuaranteed": {
+      "__typename": "YelpGuaranteed",
+      "enrolled": false
+    }
+  },
+  "BusinessLocation:LF1QAuvpfX7KGQlg2zMg6Q": {
+    "__typename": "BusinessLocation",
+    "encid": "LF1QAuvpfX7KGQlg2zMg6Q",
+    "address": {
+      "__typename": "BusinessAddress",
+      "city": "New York",
+      "addressLine1": "278 Bleecker St"
+    },
+    "neighborhoods": [
+      "West Village"
+    ]
+  },
+  "Business:LF1QAuvpfX7KGQlg2zMg6Q": {
+    "__typename": "Business",
+    "encid": "LF1QAuvpfX7KGQlg2zMg6Q",
+    "operationHours": {
+      "__typename": "OperationHours",
+      "timezone": "America/New_York",
+      "regularHoursMergedWithSpecialHoursForCurrentWeek": [
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              690,
+              1320
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              2130,
+              2760
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              3570,
+              4200
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              5010,
+              5640
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              6450,
+              7140
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              7890,
+              8580
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              9330,
+              9960
+            ]
+          ]
+        }
+      ]
+    },
+    "alias": "johns-of-bleecker-street-new-york-2",
+    "name": "John's of Bleecker Street",
+    "rating": 4.2,
+    "reviewCount": 3159,
+    "alternateNames": [],
+    "categories": [
+      {
+        "__ref": "BusinessCategory:DfJmebdT8pOtdHPRcg00eQ"
+      }
+    ],
+    "priceRange": {
+      "__typename": "PriceRange",
+      "display": "$$"
+    },
+    "location": {
+      "__ref": "BusinessLocation:LF1QAuvpfX7KGQlg2zMg6Q"
+    },
+    "serviceArea": {
+      "__typename": "BusinessServiceArea",
+      "eligible": false,
+      "primaryLocation": null
+    },
+    "containerBusiness": null,
+    "activeAlert({\"deviceType\":\"WWW\"})": null,
+    "verifiedLicenses": [],
+    "yelpGuaranteed": {
+      "__typename": "YelpGuaranteed",
+      "enrolled": false
+    }
+  },
+  "BusinessLocation:HhckmaA59cg3WrZHTWwN3A": {
+    "__typename": "BusinessLocation",
+    "encid": "HhckmaA59cg3WrZHTWwN3A",
+    "address": {
+      "__typename": "BusinessAddress",
+      "city": "New York",
+      "addressLine1": "197 Grand St"
+    },
+    "neighborhoods": [
+      "Little Italy"
+    ]
+  },
+  "Business:HhckmaA59cg3WrZHTWwN3A": {
+    "__typename": "Business",
+    "encid": "HhckmaA59cg3WrZHTWwN3A",
+    "operationHours": {
+      "__typename": "OperationHours",
+      "timezone": "America/New_York",
+      "regularHoursMergedWithSpecialHoursForCurrentWeek": [
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              720,
+              1320
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              2160,
+              2760
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              3600,
+              4200
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              5040,
+              5640
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              6480,
+              7080
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              7920,
+              8520
+            ]
+          ]
+        },
+        {
+          "__typename": "OperationHoursForADayOfWeek",
+          "regularHoursRaw": [
+            [
+              9360,
+              9960
+            ]
+          ]
+        }
+      ]
+    },
+    "alias": "l-industrie-pizzeria-little-italy-new-york-3",
+    "name": "L'industrie Pizzeria - Little Italy",
+    "rating": 4.6,
+    "reviewCount": 53,
+    "alternateNames": [],
+    "categories": [
+      {
+        "__ref": "BusinessCategory:DfJmebdT8pOtdHPRcg00eQ"
+      }
+    ],
+    "priceRange": null,
+    "location": {
+      "__ref": "BusinessLocation:HhckmaA59cg3WrZHTWwN3A"
+    },
+    "serviceArea": {
+      "__typename": "BusinessServiceArea",
+      "eligible": false,
+      "primaryLocation": null
+    },
+    "containerBusiness": null,
+    "activeAlert({\"deviceType\":\"WWW\"})": null,
+    "verifiedLicenses": [],
+    "yelpGuaranteed": {
+      "__typename": "YelpGuaranteed",
+      "enrolled": false
+    }
+  }
+}

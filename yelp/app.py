@@ -38,7 +38,22 @@ if run:
 
         try:
             page = fetch_page(url)
+            page_text = str(page.text or "").lower()
+
+            if "access denied" in page_text or "captcha" in page_text or "robot" in page_text:
+                st.error("Yelp blocked this request (datacenter IP detected). This scraper needs residential proxies to work when deployed. It works fine on your local machine.")
+                with st.expander("Debug info"):
+                    st.code(str(page.text or "")[:1000])
+                st.stop()
+
             state = extract_apollo_state(page)
+
+            if not state:
+                st.error("Yelp returned a page without the expected data. This usually means the request was blocked or Yelp changed their page structure.")
+                with st.expander("Debug — first 1000 chars of response"):
+                    st.code(str(page.text or "")[:1000])
+                st.stop()
+
             ordered = resolve_search_order(state)
             batch = parse_search_page(state, ordered) if ordered else []
         except Exception as e:
