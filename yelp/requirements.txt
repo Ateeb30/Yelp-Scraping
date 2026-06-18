@@ -1,2 +1,4 @@
 scrapling[fetchers]>=0.4.9
 streamlit>=1.45.0
+requests>=2.32.0
+flask>=3.0.0
