@@ -7,6 +7,7 @@ import glob
 import time
 import subprocess
 import urllib.request
+from urllib.parse import quote
 import streamlit as st
 from playwright.sync_api import sync_playwright
 from scrapling.parser import Selector
@@ -132,14 +133,20 @@ def _pool_download(pkg_name: str, dest_dir: str) -> tuple[bool, str]:
     except Exception as e:
         return False, f"listing failed: {e}"
 
-    prefix = re.escape(pkg_name) + r"_[^\"]+_amd64\.deb"
-    matches = re.findall(prefix, html)
+    # Extract filenames from href attributes (already URL-encoded, handles epochs like 1:)
+    href_pattern = r'href="(' + re.escape(pkg_name) + r'_[^"]+_amd64\.deb)"'
+    matches = re.findall(href_pattern, html)
+    if not matches:
+        # Fallback: search plain text, URL-encode colons (package epochs)
+        text_pattern = re.escape(pkg_name) + r"_[^\s\"<>]+_amd64\.deb"
+        raw = re.findall(text_pattern, html)
+        matches = [m.replace(":", "%3a") for m in raw]
     if not matches:
         return False, f"no amd64 deb in {pool_url}"
 
     filename = matches[-1]
     download_url = pool_url + filename
-    dest = os.path.join(dest_dir, filename)
+    dest = os.path.join(dest_dir, filename.replace("%3a", ":"))
     try:
         urllib.request.urlretrieve(download_url, dest)
         return True, download_url
@@ -234,9 +241,37 @@ def install_browsers():
     log["so_files_found"]  = len(so_files)
     log["LD_LIBRARY_PATH"] = os.environ.get("LD_LIBRARY_PATH", "")
 
-    # ── Phase 7: verify — run ldd again with updated PATH ─────────────────────
+    # ── Phase 7: spot-check key files are actually on disk ────────────────────
+    log["xi_files"]    = glob.glob(f"{_LIB_DIR}/**/libXi*",     recursive=True)
+    log["xrender_files"] = glob.glob(f"{_LIB_DIR}/**/libXrender*", recursive=True)
+
+    # Force pool download for libXi if it's somehow still absent (belt + suspenders)
+    if not log["xi_files"]:
+        ok, detail = _pool_download("libxi6", _DEB_DIR)
+        log["xi6_force_dl"] = detail if ok else f"FAILED: {detail}"
+        if ok:
+            for deb in glob.glob(f"{_DEB_DIR}/libxi6*.deb"):
+                subprocess.run(["dpkg-deb", "-x", deb, _LIB_DIR], capture_output=True)
+            log["xi_files"] = glob.glob(f"{_LIB_DIR}/**/libXi*", recursive=True)
+            # Refresh LD_LIBRARY_PATH with any new dirs
+            so_files2 = glob.glob(f"{_LIB_DIR}/**/*.so*", recursive=True)
+            lib_dirs2  = list({os.path.dirname(f) for f in so_files2})
+            os.environ["LD_LIBRARY_PATH"] = (
+                ":".join(lib_dirs2) + ":" + os.environ.get("LD_LIBRARY_PATH", "")
+            )
+
+    # ── Phase 8: verify — run ldd again with updated PATH ─────────────────────
     still_missing = _get_missing_libs(chrome_bin)
-    log["still_missing_so"] = still_missing   # should be empty if all went well
+    log["still_missing_so"] = still_missing
+
+    # Quick smoke-test: try launching chrome and immediately killing it
+    r_smoke = subprocess.run(
+        [chrome_bin, "--headless", "--no-sandbox", "--disable-gpu",
+         "--dump-dom", "about:blank"],
+        capture_output=True, text=True, timeout=10,
+    )
+    log["smoke_rc"]  = r_smoke.returncode
+    log["smoke_err"] = r_smoke.stderr[:300]
 
     return log
 
