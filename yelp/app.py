@@ -1,38 +1,63 @@
 import io
 import csv
-import sys
+import shutil
 import time
-import subprocess
 import streamlit as st
+from playwright.sync_api import sync_playwright
+from scrapling.parser import Selector
 
 from scraper import (
     build_search_url,
     extract_apollo_state,
     resolve_search_order,
     parse_search_page,
-    fetch_phone,
     RESULTS_PER_PAGE,
 )
 
+
+def cloud_fetch(url: str) -> Selector:
+    """Fetch a page using the system Chromium with basic stealth settings."""
+    chromium_path = shutil.which("chromium") or shutil.which("chromium-browser") or "/usr/bin/chromium"
+    with sync_playwright() as p:
+        browser = p.chromium.launch(
+            headless=True,
+            executable_path=chromium_path,
+            args=["--no-sandbox", "--disable-dev-shm-usage", "--disable-blink-features=AutomationControlled"],
+        )
+        ctx = browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+            extra_http_headers={"Referer": "https://www.google.com/"},
+        )
+        ctx.add_init_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+        page = ctx.new_page()
+        page.goto(url, wait_until="networkidle", timeout=60_000)
+        content = page.content()
+        browser.close()
+    return Selector(content)
+
+
+def fetch_phone_cloud(biz_url: str) -> str:
+    try:
+        page = cloud_fetch(biz_url)
+        state = extract_apollo_state(page)
+        for key, value in state.items():
+            if not key.startswith("Business:") or not isinstance(value, dict):
+                continue
+            metered = value.get("meteredPhoneNumber") or {}
+            phone = metered.get("phoneText", "")
+            if phone:
+                return phone
+            phone_info = value.get("phoneNumber") or {}
+            phone = phone_info.get("formatted", "")
+            if phone:
+                return phone
+    except Exception as e:
+        st.warning(f"Could not get phone for {biz_url}: {e}")
+    return ""
+
+
 st.set_page_config(page_title="Yelp Scraper", layout="centered")
 st.title("Yelp Business Scraper")
-
-
-@st.cache_resource(show_spinner="Setting up browser (first run only)...")
-def install_browsers():
-    # Install system dependencies (needs root — works during Streamlit Cloud build)
-    subprocess.run(
-        [sys.executable, "-m", "playwright", "install-deps", "chromium"],
-        capture_output=True,
-    )
-    # Download the Chromium binary
-    subprocess.run(
-        [sys.executable, "-m", "patchright", "install", "chromium"],
-        capture_output=True,
-    )
-
-
-install_browsers()
 
 query    = st.text_input("What are you looking for?", placeholder="e.g. pizza, dentist, plumber")
 location = st.text_input("City", placeholder="e.g. New York")
@@ -43,8 +68,6 @@ st.caption(f"Each page has ~10 results — {pages} pages = up to {pages * RESULT
 run = st.button("Scrape", type="primary", disabled=not (query and location))
 
 if run:
-    from scrapling.fetchers import StealthyFetcher
-
     all_results = []
     status = st.empty()
     progress = st.progress(0)
@@ -57,14 +80,7 @@ if run:
         status.info(f"Searching page {i + 1} of {pages}...")
 
         try:
-            page = StealthyFetcher.fetch(
-                url,
-                headless=True,
-                network_idle=True,
-                google_search=True,
-                disable_resources=True,
-                timeout=60_000,
-            )
+            page = cloud_fetch(url)
             state = extract_apollo_state(page)
             ordered = resolve_search_order(state)
             batch = parse_search_page(state, ordered) if ordered else []
@@ -88,7 +104,7 @@ if run:
     total = len(all_results)
     for idx, r in enumerate(all_results):
         status.info(f"Getting phone {idx + 1} of {total}: {r['name']}")
-        r["phone"] = fetch_phone(r["url"], use_stealth=True)
+        r["phone"] = fetch_phone_cloud(r["url"])
         progress.progress(0.5 + (idx + 1) / (total * 2))
 
         table_placeholder.dataframe(
