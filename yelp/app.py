@@ -282,21 +282,31 @@ debug = install_browsers()
 _CHROME_ARGS = [
     "--no-sandbox",
     "--disable-setuid-sandbox",
-    "--disable-dev-shm-usage",       # use /tmp instead of tiny /dev/shm
+    "--disable-dev-shm-usage",
     "--disable-gpu",
-    "--disable-software-rasterizer",
-    "--no-zygote",                   # skip zygote process, saves ~50 MB
+    "--single-process",              # browser + renderer in one process, saves ~100 MB
     "--no-first-run",
-    "--renderer-process-limit=1",    # only one renderer at a time
     "--disable-blink-features=AutomationControlled",
     "--disable-background-networking",
     "--disable-sync",
+    "--disable-extensions",
+    "--mute-audio",
+    "--hide-scrollbars",
 ]
+
+# Block resource types that aren't needed to parse Apollo state from the HTML.
+# This prevents Chrome from downloading ~3 MB of images/fonts that OOM the container.
+_BLOCK_TYPES = {"image", "media", "font", "stylesheet", "other"}
+
+
+def _block_heavy(route):
+    if route.request.resource_type in _BLOCK_TYPES:
+        route.abort()
+    else:
+        route.continue_()
 
 
 def cloud_fetch(url: str) -> Selector:
-    # Apollo state is in the initial HTML, so domcontentloaded is enough.
-    # networkidle hangs waiting for Yelp's background XHRs and can OOM the container.
     last_err: Exception | None = None
     for attempt in range(2):
         try:
@@ -314,10 +324,9 @@ def cloud_fetch(url: str) -> Selector:
                     "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
                 )
                 page = ctx.new_page()
+                page.route("**/*", _block_heavy)   # block images/fonts/css
                 page.goto(url, wait_until="domcontentloaded", timeout=60_000)
-                # Brief pause for Yelp's inline scripts to finish writing Apollo state
-                page.wait_for_timeout(2_000)
-                content = page.content()
+                content = page.content()           # Apollo state is in the initial HTML
                 browser.close()
             return Selector(content)
         except Exception as exc:
