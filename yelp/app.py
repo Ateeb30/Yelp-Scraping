@@ -294,16 +294,18 @@ _CHROME_ARGS = [
     "--hide-scrollbars",
 ]
 
-# Block resource types that aren't needed to parse Apollo state from the HTML.
-# This prevents Chrome from downloading ~3 MB of images/fonts that OOM the container.
-_BLOCK_TYPES = {"image", "media", "font", "stylesheet", "other"}
-
-
 def _block_heavy(route):
-    if route.request.resource_type in _BLOCK_TYPES:
+    rtype = route.request.resource_type
+    req_url = route.request.url
+    # Always block: images, fonts, CSS, media (saves ~3 MB per page)
+    if rtype in {"image", "media", "font", "stylesheet"}:
         route.abort()
-    else:
-        route.continue_()
+        return
+    # Block third-party XHR/fetch (ads, analytics, tracking) — allow yelp.com own requests
+    if rtype in {"xhr", "fetch"} and "yelp.com" not in req_url:
+        route.abort()
+        return
+    route.continue_()
 
 
 def cloud_fetch(url: str) -> Selector:
@@ -324,9 +326,11 @@ def cloud_fetch(url: str) -> Selector:
                     "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
                 )
                 page = ctx.new_page()
-                page.route("**/*", _block_heavy)   # block images/fonts/css
-                page.goto(url, wait_until="domcontentloaded", timeout=60_000)
-                content = page.content()           # Apollo state is in the initial HTML
+                page.route("**/*", _block_heavy)
+                # wait_until="load" lets Cloudflare's JS challenge run and redirect
+                # to the real Yelp page before we grab the content.
+                page.goto(url, wait_until="load", timeout=60_000)
+                content = page.content()
                 browser.close()
             return Selector(content)
         except Exception as exc:
