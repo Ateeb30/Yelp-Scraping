@@ -27,7 +27,9 @@ _REQUIRED_PACKAGES = [
     "libnspr4",
     "libdbus-1-3",
     "libatk1.0-0",
+    "libatk1.0-0t64",
     "libatk-bridge2.0-0",
+    "libatk-bridge2.0-0t64",
     "libcups2",
     "libdrm2",
     "libxkbcommon0",
@@ -39,6 +41,7 @@ _REQUIRED_PACKAGES = [
     "libasound2",
     "libasound2t64",     # Ubuntu 24.04 renamed it
     "libatspi2.0-0",
+    "libatspi2.0-0t64",
     "libexpat1",
 ]
 
