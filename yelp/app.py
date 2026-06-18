@@ -19,36 +19,63 @@ from scraper import (
     RESULTS_PER_PAGE,
 )
 
-# Packages that Playwright's Chromium headless shell needs on a minimal Debian/Ubuntu image.
-# apt-get download requires no root — it just fetches the .deb to a local dir.
-# dpkg-deb -x also requires no root — it just extracts files to a local dir.
-_REQUIRED_PACKAGES = [
-    "libglib2.0-0",
-    "libglib2.0-0t64",
-    "libnss3",
-    "libnspr4",
-    "libdbus-1-3",
-    "libatk1.0-0",
-    "libatk1.0-0t64",
-    "libatk-bridge2.0-0",
-    "libatk-bridge2.0-0t64",
-    "libcups2",
-    "libdrm2",
-    "libxkbcommon0",
-    "libxcomposite1",
-    "libxdamage1",
-    "libxfixes3",
-    "libxrandr2",
-    "libgbm1",
-    "libasound2",
-    "libasound2t64",
-    "libatspi2.0-0",
-    "libatspi2.0-0t64",
-    "libexpat1",
-]
+_LIB_DIR = "/tmp/pw_libs"
+_DEB_DIR = "/tmp/debs"
 
-# For packages that aren't in the apt index, fall back to Debian's public pool.
-# Scraped from the directory listing — no hardcoded version numbers needed.
+# Complete map of .so name → Debian/Ubuntu package candidates.
+# Both the classic name and the t64 variant are listed so either works.
+_SO_TO_PKG = {
+    "libglib-2.0.so.0":        ["libglib2.0-0",        "libglib2.0-0t64"],
+    "libgmodule-2.0.so.0":     ["libglib2.0-0",        "libglib2.0-0t64"],
+    "libgio-2.0.so.0":         ["libglib2.0-0",        "libglib2.0-0t64"],
+    "libgobject-2.0.so.0":     ["libglib2.0-0",        "libglib2.0-0t64"],
+    "libatk-1.0.so.0":         ["libatk1.0-0",         "libatk1.0-0t64"],
+    "libatk-bridge-2.0.so.0":  ["libatk-bridge2.0-0",  "libatk-bridge2.0-0t64"],
+    "libatspi.so.0":            ["libatspi2.0-0",       "libatspi2.0-0t64"],
+    "libdbus-1.so.3":           ["libdbus-1-3"],
+    "libcups.so.2":             ["libcups2"],
+    "libdrm.so.2":              ["libdrm2"],
+    "libX11.so.6":              ["libx11-6"],
+    "libXcomposite.so.1":       ["libxcomposite1"],
+    "libXdamage.so.1":          ["libxdamage1"],
+    "libXext.so.6":             ["libxext6"],
+    "libXfixes.so.3":           ["libxfixes3"],
+    "libXrandr.so.2":           ["libxrandr2"],
+    "libXrender.so.1":          ["libxrender1"],
+    "libxcb.so.1":              ["libxcb1"],
+    "libxkbcommon.so.0":        ["libxkbcommon0"],
+    "libgbm.so.1":              ["libgbm1"],
+    "libnspr4.so":              ["libnspr4"],
+    "libnss3.so":               ["libnss3"],
+    "libnssutil3.so":           ["libnss3"],
+    "libsmime3.so":             ["libnss3"],
+    "libssl3.so":               ["libnss3"],
+    "libplc4.so":               ["libnspr4"],
+    "libplds4.so":              ["libnspr4"],
+    "libasound.so.2":           ["libasound2",          "libasound2t64"],
+    "libexpat.so.1":            ["libexpat1"],
+    "libpango-1.0.so.0":        ["libpango-1.0-0"],
+    "libpangocairo-1.0.so.0":   ["libpango-1.0-0"],
+    "libcairo.so.2":            ["libcairo2"],
+    "libz.so.1":                ["zlib1g"],
+    "libwoff2dec.so.1.0.2":     ["libwoff1"],
+    "libopus.so.0":             ["libopus0"],
+    "libwebp.so.7":             ["libwebp7"],
+    "libwebpdemux.so.2":        ["libwebpdemux2"],
+    "libEGL.so.1":              ["libegl1"],
+    "libGLESv2.so.2":           ["libgles2"],
+    # glibc — always present, skip
+    "libc.so.6":                [],
+    "libm.so.6":                [],
+    "libpthread.so.0":          [],
+    "libdl.so.2":               [],
+    "librt.so.1":               [],
+    "libresolv.so.2":           [],
+    "ld-linux-x86-64.so.2":     [],
+    "linux-vdso.so.1":          [],
+}
+
+# For packages apt-get can't find, fetch directly from Debian's pool.
 _POOL_DIRS = {
     "libatk1.0-0":           "http://deb.debian.org/debian/pool/main/a/atk1.0/",
     "libatk1.0-0t64":        "http://deb.debian.org/debian/pool/main/a/atk1.0/",
@@ -56,35 +83,59 @@ _POOL_DIRS = {
     "libatk-bridge2.0-0t64": "http://deb.debian.org/debian/pool/main/a/at-spi2-atk/",
     "libatspi2.0-0":         "http://deb.debian.org/debian/pool/main/a/at-spi2-core/",
     "libatspi2.0-0t64":      "http://deb.debian.org/debian/pool/main/a/at-spi2-core/",
+    "libxrender1":           "http://deb.debian.org/debian/pool/main/libx/libxrender/",
+    "libx11-6":              "http://deb.debian.org/debian/pool/main/libx/libx11/",
+    "libxext6":              "http://deb.debian.org/debian/pool/main/libx/libxext/",
+    "libxcb1":               "http://deb.debian.org/debian/pool/main/libx/libxcb/",
+    "libxrandr2":            "http://deb.debian.org/debian/pool/main/libx/libxrandr/",
+    "libxfixes3":            "http://deb.debian.org/debian/pool/main/libx/libxfixes/",
+    "libxdamage1":           "http://deb.debian.org/debian/pool/main/libx/libxdamage/",
+    "libxcomposite1":        "http://deb.debian.org/debian/pool/main/libx/libxcomposite/",
+    "libxkbcommon0":         "http://deb.debian.org/debian/pool/main/libx/libxkbcommon/",
+    "libpango-1.0-0":        "http://deb.debian.org/debian/pool/main/p/pango1.0/",
+    "libcairo2":             "http://deb.debian.org/debian/pool/main/c/cairo/",
+    "libglib2.0-0":          "http://deb.debian.org/debian/pool/main/g/glib2.0/",
+    "libglib2.0-0t64":       "http://deb.debian.org/debian/pool/main/g/glib2.0/",
+    "libnspr4":              "http://deb.debian.org/debian/pool/main/n/nspr/",
+    "libnss3":               "http://deb.debian.org/debian/pool/main/n/nss/",
+    "libdrm2":               "http://deb.debian.org/debian/pool/main/libd/libdrm/",
+    "libgbm1":               "http://deb.debian.org/debian/pool/main/m/mesa/",
+    "libexpat1":             "http://deb.debian.org/debian/pool/main/e/expat/",
+    "libcups2":              "http://deb.debian.org/debian/pool/main/c/cups/",
+    "libasound2":            "http://deb.debian.org/debian/pool/main/a/alsa-lib/",
+    "libasound2t64":         "http://deb.debian.org/debian/pool/main/a/alsa-lib/",
+    "libdbus-1-3":           "http://deb.debian.org/debian/pool/main/d/dbus/",
+    "zlib1g":                "http://deb.debian.org/debian/pool/main/z/zlib/",
+    "libwoff1":              "http://deb.debian.org/debian/pool/main/w/woff2/",
+    "libopus0":              "http://deb.debian.org/debian/pool/main/o/opus/",
+    "libwebp7":              "http://deb.debian.org/debian/pool/main/libw/libwebp/",
+    "libwebpdemux2":         "http://deb.debian.org/debian/pool/main/libw/libwebp/",
+    "libegl1":               "http://deb.debian.org/debian/pool/main/libg/libglvnd/",
+    "libgles2":              "http://deb.debian.org/debian/pool/main/libg/libglvnd/",
 }
-
-_LIB_DIR = "/tmp/pw_libs"
-_DEB_DIR = "/tmp/debs"
 
 
 def _pool_download(pkg_name: str, dest_dir: str) -> tuple[bool, str]:
     """
     Fetch Debian's pool directory listing, find the latest amd64 deb for
-    pkg_name, download it to dest_dir.  Returns (success, detail).
+    pkg_name, and download it to dest_dir.
     """
     pool_url = _POOL_DIRS.get(pkg_name)
     if not pool_url:
         return False, "no pool URL defined"
-
     try:
         req = urllib.request.Request(pool_url, headers={"User-Agent": "Mozilla/5.0"})
         with urllib.request.urlopen(req, timeout=15) as resp:
             html = resp.read().decode("utf-8", errors="replace")
     except Exception as e:
-        return False, f"listing fetch failed: {e}"
+        return False, f"listing failed: {e}"
 
-    # Find all amd64 debs for this exact package (prefix match)
     prefix = re.escape(pkg_name) + r"_[^\"]+_amd64\.deb"
     matches = re.findall(prefix, html)
     if not matches:
-        return False, f"no amd64 deb found in {pool_url}"
+        return False, f"no amd64 deb in {pool_url}"
 
-    filename = matches[-1]          # last = newest version in the listing
+    filename = matches[-1]
     download_url = pool_url + filename
     dest = os.path.join(dest_dir, filename)
     try:
@@ -94,75 +145,96 @@ def _pool_download(pkg_name: str, dest_dir: str) -> tuple[bool, str]:
         return False, f"download failed: {e}"
 
 
+def _get_missing_libs(binary: str) -> list[str]:
+    """Run ldd on binary and return names of all .so files reported as 'not found'."""
+    r = subprocess.run(["ldd", binary], capture_output=True, text=True)
+    missing = []
+    for line in r.stdout.splitlines():
+        if "not found" in line:
+            so_name = line.strip().split()[0]
+            missing.append(so_name)
+    return missing
+
+
+def _download_pkg(pkg: str, dest_dir: str) -> str:
+    """Try apt-get download first, fall back to Debian pool. Returns status string."""
+    r = subprocess.run(
+        ["apt-get", "download", pkg],
+        cwd=dest_dir, capture_output=True, text=True,
+    )
+    if r.returncode == 0:
+        return "apt-ok"
+    if pkg in _POOL_DIRS:
+        ok, detail = _pool_download(pkg, dest_dir)
+        return detail if ok else f"FAILED: {detail}"
+    return f"skip (no pool URL, apt rc={r.returncode})"
+
+
 @st.cache_resource(show_spinner="Setting up browser (first run only)...")
 def install_browsers():
     log = {}
-
-    # ── OS info (helps diagnose future failures) ───────────────────────────────
-    try:
-        with open("/etc/os-release") as f:
-            log["os_release"] = f.read().strip()[:200]
-    except Exception:
-        log["os_release"] = "n/a"
-
     os.makedirs(_LIB_DIR, exist_ok=True)
     os.makedirs(_DEB_DIR, exist_ok=True)
 
-    # ── Step 1: try apt-get download first (fast, no root needed) ─────────────
-    apt_results = {}
-    for pkg in _REQUIRED_PACKAGES:
-        r = subprocess.run(
-            ["apt-get", "download", pkg],
-            cwd=_DEB_DIR, capture_output=True, text=True,
-        )
-        apt_results[pkg] = r.returncode
+    # ── Phase 1: install Playwright's Chromium binary (download only, no libs needed) ──
+    r_install = subprocess.run(
+        [sys.executable, "-m", "playwright", "install", "chromium"],
+        capture_output=True, text=True,
+    )
+    log["install_rc"]  = r_install.returncode
+    log["install_out"] = (r_install.stdout + r_install.stderr)[-200:]
 
-    log["apt_results"] = apt_results
+    # ── Phase 2: find the binary and use ldd to list ALL missing .so files ─────
+    chrome_bins = glob.glob(
+        os.path.expanduser("~/.cache/ms-playwright/**/chrome-headless-shell"),
+        recursive=True,
+    )
+    if not chrome_bins:
+        log["error"] = "chromium binary not found after install"
+        return log
 
-    # ── Step 2: for packages apt couldn't find, fetch from Debian pool ─────────
-    fallback_results = {}
-    for pkg, rc in apt_results.items():
-        if rc != 0 and pkg in _POOL_DIRS:
-            ok, detail = _pool_download(pkg, _DEB_DIR)
-            fallback_results[pkg] = detail if ok else f"FAILED: {detail}"
+    chrome_bin = chrome_bins[0]
+    log["chrome_bin"] = chrome_bin
 
-    log["fallback_results"] = fallback_results
+    missing_so = _get_missing_libs(chrome_bin)
+    log["missing_so_initial"] = missing_so
 
-    # ── Step 3: extract every downloaded deb ──────────────────────────────────
+    # ── Phase 3: resolve .so names → package names ─────────────────────────────
+    pkgs_needed: list[str] = []
+    unknown_so: list[str] = []
+    for so in missing_so:
+        candidates = _SO_TO_PKG.get(so)
+        if candidates is None:
+            unknown_so.append(so)
+        else:
+            pkgs_needed.extend(candidates)
+
+    pkgs_needed = list(dict.fromkeys(pkgs_needed))   # dedup, preserve order
+    log["packages_needed"] = pkgs_needed
+    log["unknown_so"]      = unknown_so              # libs with no known mapping
+
+    # ── Phase 4: download all needed packages ──────────────────────────────────
+    dl_results = {pkg: _download_pkg(pkg, _DEB_DIR) for pkg in pkgs_needed}
+    log["dl_results"] = dl_results
+
+    # ── Phase 5: extract every downloaded deb ─────────────────────────────────
     debs = glob.glob(f"{_DEB_DIR}/*.deb")
-    extract_results = {}
     for deb in debs:
-        r = subprocess.run(
-            ["dpkg-deb", "-x", deb, _LIB_DIR],
-            capture_output=True, text=True,
-        )
-        extract_results[os.path.basename(deb)] = r.returncode
+        subprocess.run(["dpkg-deb", "-x", deb, _LIB_DIR], capture_output=True)
 
-    log["extract_results"] = extract_results
-
-    # ── Step 4: set LD_LIBRARY_PATH to the extracted libs ─────────────────────
+    # ── Phase 6: set LD_LIBRARY_PATH ──────────────────────────────────────────
     so_files = glob.glob(f"{_LIB_DIR}/**/*.so*", recursive=True)
     lib_dirs = list({os.path.dirname(f) for f in so_files})
     if lib_dirs:
         os.environ["LD_LIBRARY_PATH"] = (
             ":".join(lib_dirs) + ":" + os.environ.get("LD_LIBRARY_PATH", "")
         )
-
     log["so_files_found"]  = len(so_files)
-    log["lib_dirs"]        = lib_dirs
     log["LD_LIBRARY_PATH"] = os.environ.get("LD_LIBRARY_PATH", "")
 
-    # ── Step 5: install Playwright's Chromium binary ───────────────────────────
-    r_install = subprocess.run(
-        [sys.executable, "-m", "playwright", "install", "chromium"],
-        capture_output=True, text=True,
-    )
-    log["install_rc"]  = r_install.returncode
-    log["install_out"] = (r_install.stdout + r_install.stderr)[-400:]
-
-    # ── Step 6: spot-check key libs ───────────────────────────────────────────
-    log["atk_files"]  = glob.glob(f"{_LIB_DIR}/**/libatk*.so*", recursive=True)
-    log["glib_files"] = glob.glob(f"{_LIB_DIR}/**/libglib-2.0.so*", recursive=True)
+    # ── Phase 7: verify — run ldd again with updated PATH ─────────────────────
+    still_missing = _get_missing_libs(chrome_bin)
+    log["still_missing_so"] = still_missing   # should be empty if all went well
 
     return log
 
