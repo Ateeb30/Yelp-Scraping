@@ -20,6 +20,12 @@ st.title("Yelp Business Scraper")
 
 @st.cache_resource(show_spinner="Setting up browser (first run only)...")
 def install_browsers():
+    # Install system dependencies (needs root — works during Streamlit Cloud build)
+    subprocess.run(
+        [sys.executable, "-m", "playwright", "install-deps", "chromium"],
+        capture_output=True,
+    )
+    # Download the Chromium binary
     subprocess.run(
         [sys.executable, "-m", "patchright", "install", "chromium"],
         capture_output=True,
