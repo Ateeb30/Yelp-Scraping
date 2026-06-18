@@ -17,49 +17,103 @@ from scraper import (
     RESULTS_PER_PAGE,
 )
 
+# Packages that Playwright's Chromium headless shell needs on a minimal Debian/Ubuntu image.
+# apt-get download requires no root — it just fetches the .deb to a local dir.
+# dpkg-deb -x also requires no root — it just extracts files to a local dir.
+_REQUIRED_PACKAGES = [
+    "libglib2.0-0",
+    "libglib2.0-0t64",   # Ubuntu 24.04 renamed it
+    "libnss3",
+    "libnspr4",
+    "libdbus-1-3",
+    "libatk1.0-0",
+    "libatk-bridge2.0-0",
+    "libcups2",
+    "libdrm2",
+    "libxkbcommon0",
+    "libxcomposite1",
+    "libxdamage1",
+    "libxfixes3",
+    "libxrandr2",
+    "libgbm1",
+    "libasound2",
+    "libasound2t64",     # Ubuntu 24.04 renamed it
+    "libatspi2.0-0",
+    "libexpat1",
+]
+
+_LIB_DIR = "/tmp/pw_libs"
+
 
 @st.cache_resource(show_spinner="Setting up browser (first run only)...")
 def install_browsers():
-    # Try playwright's own dep installer (needs sudo — works on some cloud envs)
-    r_deps = subprocess.run(
-        ["sudo", sys.executable, "-m", "playwright", "install-deps", "chromium"],
-        capture_output=True, text=True,
-    )
+    log = {}
 
-    # Search the filesystem for libglib and set LD_LIBRARY_PATH to wherever it is
-    glib_files = (
-        glob.glob("/usr/**/libglib-2.0.so*", recursive=True)
-        + glob.glob("/lib/**/libglib-2.0.so*", recursive=True)
-    )
-    if glib_files:
-        dirs = ":".join({os.path.dirname(f) for f in glib_files})
-        os.environ["LD_LIBRARY_PATH"] = dirs + ":" + os.environ.get("LD_LIBRARY_PATH", "")
+    # ── Step 1: download missing system libs without root ──────────────────────
+    os.makedirs(_LIB_DIR, exist_ok=True)
+    os.makedirs("/tmp/debs", exist_ok=True)
 
-    # Install Playwright's Chromium binary
+    dl_results = {}
+    for pkg in _REQUIRED_PACKAGES:
+        r = subprocess.run(
+            ["apt-get", "download", pkg],
+            cwd="/tmp/debs",
+            capture_output=True, text=True,
+        )
+        dl_results[pkg] = r.returncode
+
+    log["download_results"] = dl_results
+
+    # ── Step 2: extract all downloaded debs ────────────────────────────────────
+    debs = glob.glob("/tmp/debs/*.deb")
+    extract_results = {}
+    for deb in debs:
+        r = subprocess.run(
+            ["dpkg-deb", "-x", deb, _LIB_DIR],
+            capture_output=True, text=True,
+        )
+        extract_results[os.path.basename(deb)] = r.returncode
+
+    log["extract_results"] = extract_results
+
+    # ── Step 3: point LD_LIBRARY_PATH at the extracted shared objects ──────────
+    so_files = glob.glob(f"{_LIB_DIR}/**/*.so*", recursive=True)
+    lib_dirs  = list({os.path.dirname(f) for f in so_files})
+    if lib_dirs:
+        os.environ["LD_LIBRARY_PATH"] = ":".join(lib_dirs) + ":" + os.environ.get("LD_LIBRARY_PATH", "")
+
+    log["so_files_found"] = len(so_files)
+    log["lib_dirs"]       = lib_dirs
+    log["LD_LIBRARY_PATH"] = os.environ.get("LD_LIBRARY_PATH", "")
+
+    # ── Step 4: install Playwright's Chromium binary ───────────────────────────
     r_install = subprocess.run(
         [sys.executable, "-m", "playwright", "install", "chromium"],
         capture_output=True, text=True,
     )
+    log["install_rc"]  = r_install.returncode
+    log["install_out"] = (r_install.stdout + r_install.stderr)[-400:]
 
-    return {
-        "glib_files": glib_files,
-        "deps_rc": r_deps.returncode,
-        "deps_out": r_deps.stdout[-300:] + r_deps.stderr[-300:],
-        "install_rc": r_install.returncode,
-        "install_out": r_install.stdout[-300:] + r_install.stderr[-300:],
-        "ld_path": os.environ.get("LD_LIBRARY_PATH", ""),
-    }
+    # ── Step 5: verify glib is now findable ────────────────────────────────────
+    glib_files = glob.glob(f"{_LIB_DIR}/**/libglib-2.0.so*", recursive=True)
+    log["glib_files"] = glib_files
+
+    return log
 
 
 debug = install_browsers()
 
 
 def cloud_fetch(url: str) -> Selector:
+    env = os.environ.copy()
     with sync_playwright() as p:
         browser = p.chromium.launch(
             headless=True,
-            args=["--no-sandbox", "--disable-dev-shm-usage",
-                  "--disable-blink-features=AutomationControlled"],
+            args=[
+                "--no-sandbox",
+                "--disable-dev-shm-usage",
+                "--disable-blink-features=AutomationControlled",
+            ],
         )
         ctx = browser.new_context(
             user_agent=(
