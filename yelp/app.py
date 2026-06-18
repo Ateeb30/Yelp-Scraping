@@ -284,7 +284,6 @@ _CHROME_ARGS = [
     "--disable-setuid-sandbox",
     "--disable-dev-shm-usage",
     "--disable-gpu",
-    "--single-process",              # browser + renderer in one process, saves ~100 MB
     "--no-first-run",
     "--disable-blink-features=AutomationControlled",
     "--disable-background-networking",
@@ -327,9 +326,20 @@ def cloud_fetch(url: str) -> Selector:
                 )
                 page = ctx.new_page()
                 page.route("**/*", _block_heavy)
-                # wait_until="load" lets Cloudflare's JS challenge run and redirect
-                # to the real Yelp page before we grab the content.
-                page.goto(url, wait_until="load", timeout=60_000)
+                # "commit" fires the instant the HTTP response starts arriving —
+                # before any scripts run.  We then poll the live DOM until
+                # ROOT_QUERY appears (i.e., Cloudflare challenge solved + Yelp
+                # page rendered) and grab content at that exact moment.
+                page.goto(url, wait_until="commit", timeout=60_000)
+                try:
+                    page.wait_for_function(
+                        "() => document.documentElement.innerHTML"
+                        ".includes('ROOT_QUERY')",
+                        timeout=30_000,
+                        polling=500,
+                    )
+                except Exception:
+                    pass  # timeout — grab whatever is there
                 content = page.content()
                 browser.close()
             return Selector(content)
