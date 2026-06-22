@@ -20,25 +20,32 @@ app = Flask(__name__)
 
 @app.route("/search")
 def search():
-    query    = request.args.get("query", "")
-    location = request.args.get("location", "")
-    start    = int(request.args.get("start", 0))
-    if not query or not location:
-        return jsonify({"error": "query and location are required"}), 400
-    url   = build_search_url(query, location, start)
-    page  = fetch_page(url)
-    state = extract_apollo_state(page)
-    order = resolve_search_order(state)
-    results = parse_search_page(state, order) if order else []
-    return jsonify(results)
+    try:
+        query    = request.args.get("query", "")
+        location = request.args.get("location", "")
+        start    = int(request.args.get("start", 0))
+        if not query or not location:
+            return jsonify({"error": "query and location are required"}), 400
+        url   = build_search_url(query, location, start)
+        page  = fetch_page(url)
+        state = extract_apollo_state(page)
+        order = resolve_search_order(state)
+        results = parse_search_page(state, order) if order else []
+        return jsonify(results)
+    except Exception as e:
+        import traceback
+        return jsonify({"error": str(e), "trace": traceback.format_exc()}), 500
 
 
 @app.route("/phone")
 def phone():
-    biz_url = request.args.get("url", "")
-    if not biz_url:
-        return jsonify({"phone": ""})
-    return jsonify({"phone": fetch_phone(biz_url)})
+    try:
+        biz_url = request.args.get("url", "")
+        if not biz_url:
+            return jsonify({"phone": ""})
+        return jsonify({"phone": fetch_phone(biz_url)})
+    except Exception as e:
+        return jsonify({"phone": "", "error": str(e)}), 500
 
 
 @app.route("/ping")

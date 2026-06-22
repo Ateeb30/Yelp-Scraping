@@ -66,8 +66,13 @@ def _search_page(query, location, start, api_url, proxy_arg):
             params={"query": query, "location": location, "start": start},
             timeout=30,
         )
-        r.raise_for_status()
-        return r.json()
+        try:
+            data = r.json()
+        except Exception:
+            raise RuntimeError(f"API returned non-JSON (HTTP {r.status_code}):\n{r.text[:500]}")
+        if isinstance(data, dict) and "error" in data:
+            raise RuntimeError(f"API error: {data['error']}\n{data.get('trace', '')}")
+        return data
     page_sel = fetch_page(build_search_url(query, location, start), proxy=proxy_arg)
     state    = extract_apollo_state(page_sel)
     ordered  = resolve_search_order(state)
